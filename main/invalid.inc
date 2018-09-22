@@ -13,6 +13,7 @@
 #define INVALID_SKIN_ID						-1
 #define INVALID_MODEL_ID					-1
 #define INVALID_CHECKPOINT_ID				-1
+#define INVALID_MAPICON_ID					-1
 #define INVALID_PICKUP_ID					-1
 #define INVALID_AREA_ID						-1
 #define INVALID_TIMER_ID					-1
