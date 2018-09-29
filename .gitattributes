@@ -1,0 +1,7 @@
+# Auto detect text files and perform LF normalization
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Programming Language
+*.pwn linguist-language=Pawn
+*.inc linguist-language=Pawn
