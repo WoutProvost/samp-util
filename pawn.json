@@ -1,0 +1,7 @@
+{
+	"user": "WoutProvost",
+	"repo": "samp-util",
+	"dependencies": [
+		"sampctl/samp-stdlib"
+	]
+}
