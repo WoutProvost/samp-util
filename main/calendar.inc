@@ -16,6 +16,8 @@
  * -NOTES:
  * 		-Sunday = 0, Monday = 1, etc.
  * 		-This function preserves neither year nor day, but this is not an issue since the parameters are passed by value.
+ * -CREDITS:
+ * 		-Michael Keith and Tom Craver: https://en.wikipedia.org/wiki/Determination_of_the_day_of_the_week#Implementation-dependent_methods
  */
 //native GetWeekDay(year, month, day); //Fake native
 stock GetWeekDay(year, month, day) {
