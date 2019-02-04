@@ -77,6 +77,40 @@ stock GetWeaponModel(weaponid) {
 	return INVALID_MODEL_ID;
 }
 
+//GET WEAPON VEHICLE DAMAGE
+/**
+ * -DESCRIPTION:
+ * 		-Get a weapon's vehicle damage.
+ * -PARAMETERS:
+ * 		-weaponid: The ID of the weapon to get the vehicle damage of.
+ * -RETURN VALUES:
+ * 		-valid damage: The function executed successfully.
+ * 		-0.0: The function failed to execute. An invalid weaponid was given or the weaponid given is not a bullet weapon.
+ * -NOTES:
+ * 		-Values taken from weapon.dat singleplayer file. These are the actual damage values for vehicles. Multiply by 0.33 for player damage values.
+ */
+//native Float:GetWeaponVehicleDamage(weaponid); //Fake native
+stock Float:GetWeaponVehicleDamage(weaponid) {
+	new Float:damage = 0.0;
+	switch(weaponid) {
+		case WEAPON_COLT45: damage = 25.0;
+		case WEAPON_SILENCED: damage = 40.0;
+		case WEAPON_DEAGLE: damage = 140.0;
+		case WEAPON_SHOTGUN: damage = 10.0;
+		case WEAPON_SAWEDOFF: damage = 10.0;
+		case WEAPON_SHOTGSPA: damage = 15.0;
+		case WEAPON_UZI: damage = 20.0;
+		case WEAPON_TEC9: damage = 20.0;
+		case WEAPON_MP5: damage = 25.0;
+		case WEAPON_AK47: damage = 30.0;
+		case WEAPON_M4: damage = 30.0;
+		case WEAPON_RIFLE: damage = 75.0;
+		case WEAPON_SNIPER: damage = 125.0;
+		case WEAPON_MINIGUN: damage = 140.0;
+	}
+	return damage;
+}
+
 //========================================HOOKED FUNCTIONS========================================
 //GET WEAPON NAME
 /**
