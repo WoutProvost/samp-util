@@ -38,7 +38,7 @@ static const MainCalendar_WeekdayNames[][2][] = {
 	{"Wednesday", "Wed"},
 	{"Thursday", "Thu"},
 	{"Friday", "Fri"},
-	{"Saterday", "Sat"}
+	{"Saturday", "Sat"}
 };
 
 //GET WEEKDAY NAME
