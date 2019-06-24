@@ -1061,12 +1061,12 @@ stock MainVehicle_ChangeVehicleColor(vehicleid, color1, color2) {
 #endif
 #define ChangeVehicleColor MainVehicle_ChangeVehicleColor
 
-stock MainVehicle_MakeVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, respawn_delay, color1 = -1, color2 = -1, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
+stock MainVehicle_CreateVehicleEx(vehicletype, Float:x, Float:y, Float:z, Float:rotation, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = false, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
 	new vehicleid;
-	if(GetVehicleModelType(modelid) == VEHICLE_TYPE_TRAIN) { //TRAINS
-		vehicleid = AddStaticVehicleEx(modelid, spawn_x, spawn_y, spawn_z, z_angle, color1, color2, respawn_delay, addsiren);
+	if(GetVehicleModelType(vehicletype) == VEHICLE_TYPE_TRAIN) { //TRAINS
+		vehicleid = AddStaticVehicleEx(vehicletype, x, y, z, rotation, color1, color2, respawn_delay, addsiren);
 	} else {
-		vehicleid = CreateVehicle(modelid, spawn_x, spawn_y, spawn_z, z_angle, color1, color2, respawn_delay, addsiren);
+		vehicleid = CreateVehicle(vehicletype, x, y, z, rotation, color1, color2, respawn_delay, addsiren);
 	}
 
 	if(vehicleid != INVALID_VEHICLE_ID) {
@@ -1095,19 +1095,27 @@ stock MainVehicle_MakeVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn
 #else
 	#define _ALS_CreateVehicle
 #endif
-#define CreateVehicle MainVehicle_MakeVehicle
+#define CreateVehicle MainVehicle_CreateVehicleEx
+
+stock MainVehicle_AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = false, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
+	return CreateVehicle(modelid, spawn_x, spawn_y, spawn_z, z_angle, color1, color2, respawn_delay, addsiren, worldid, interiorid, paintjobid);
+}
 #if defined _ALS_AddStaticVehicleEx
 	#undef AddStaticVehicleEx
 #else
 	#define _ALS_AddStaticVehicleEx
 #endif
-#define AddStaticVehicleEx MainVehicle_MakeVehicle
+#define AddStaticVehicleEx MainVehicle_AddStaticVehicleEx
+
+stock MainVehicle_AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = false, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
+	return CreateVehicle(modelid, spawn_x, spawn_y, spawn_z, z_angle, color1, color2, respawn_delay, addsiren, worldid, interiorid, paintjobid);
+}
 #if defined _ALS_AddStaticVehicle
 	#undef AddStaticVehicle
 #else
 	#define _ALS_AddStaticVehicle
 #endif
-#define AddStaticVehicle MainVehicle_MakeVehicle
+#define AddStaticVehicle MainVehicle_AddStaticVehicle
 
 stock MainVehicle_DestroyVehicle(vehicleid) {
 	if(IsValidVehicle(vehicleid)) {

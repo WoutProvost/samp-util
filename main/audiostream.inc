@@ -123,7 +123,7 @@ static MainAudioStream_ExitScript() {
 #endif
 
 //========================================HOOKED FUNCTIONS========================================
-stock MainAudioStream_PlayAudioStream(playerid, const url[], time = -1, Float:posX = 0.0, Float:posY = 0.0, Float:posZ = 0.0, Float:distance = 50.0, usepos = 0) {
+stock MainAudioStream_PlayAudioStream(playerid, const url[], Float:posX = 0.0, Float:posY = 0.0, Float:posZ = 0.0, Float:distance = 50.0, usepos = 0, time = -1) {
 	new ret = PlayAudioStreamForPlayer(playerid, url, posX, posY, posZ, distance, usepos);
 	if(ret == 1) {
 		//DURATION
