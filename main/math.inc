@@ -54,7 +54,7 @@
  * 		-Not a number as per the IEEE 754-1985 standard.
  */
 #if !defined FLOAT_NAN
-	#define FLOAT_NAN							(Float:0xFFFFFFFF)
+	#define FLOAT_NAN							(Float:0x7FFFFFFF)
 #endif
 
 //IS NOT A NUMBER
