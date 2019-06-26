@@ -234,7 +234,7 @@ public OnPlayerSpawn(playerid)
 #endif
 
 //========================================HOOKED FUNCTIONS========================================
-stock MainClass_MakePlayerClassEx(teamid, modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle,
+stock MainClass_AddPlayerClassEx(teamid, modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle,
 weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapon3_ammo = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL) {
 	new classid = AddPlayerClassEx(teamid, modelid, spawn_x, spawn_y, spawn_z, z_angle, weapon1, weapon1_ammo, weapon2, weapon2_ammo, weapon3, weapon3_ammo);
 
@@ -251,9 +251,9 @@ weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapo
 #else
 	#define _ALS_AddPlayerClassEx
 #endif
-#define AddPlayerClassEx MainClass_MakePlayerClassEx
+#define AddPlayerClassEx MainClass_AddPlayerClassEx
 
-stock MainClass_MakePlayerClass(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle,
+stock MainClass_AddPlayerClass(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle,
 weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapon3_ammo = 0, teamid = NO_TEAM, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL) {
 	return AddPlayerClassEx(teamid, modelid, spawn_x, spawn_y, spawn_z, z_angle, weapon1, weapon1_ammo, weapon2, weapon2_ammo, weapon3, weapon3_ammo, worldid, interiorid);
 }
@@ -262,4 +262,4 @@ weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapo
 #else
 	#define _ALS_AddPlayerClass
 #endif
-#define AddPlayerClass MainClass_MakePlayerClass
+#define AddPlayerClass MainClass_AddPlayerClass
