@@ -225,16 +225,6 @@ GetZoneCoordinates(zoneid, &Float:x_min, &Float:y_min, &Float:z_min, &Float:x_ma
 ```
 
 ## Testing
-<!--
-What sampctl package run does - run unit tests or prompt user to connect as a player.
-
-Whether your library is tested with a simple `main()` and `print`,
-unit-tested, or demonstrated via prompting the player to connect, you should
-include some basic information for users to try out your code in some way.
-
-Depending on whether your package is tested via in-game "demo tests" or
-y_testing unit-tests, you should indicate to readers what to expect below here.
--->
 To test, simply run the package:
 ```bash
 sampctl package run

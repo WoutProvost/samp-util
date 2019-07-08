@@ -40,6 +40,9 @@ logs/
 server_log.txt
 crashinfo.txt
 
+# Ban list
+samp.ban
+
 #
 # Common files
 #
