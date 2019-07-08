@@ -89,6 +89,7 @@ static MainVehicle_SpawnWorld[MAX_VEHICLES] = {INVALID_VIRTUAL_WORLD_ID, ...};
  * 		-Otherwise, when a vehicle 'dies' in a certain interior, it will respawn in that interior and not in the interior it was first created.
  * 		-Defaults to INTERIOR_NORMAL.
  */
+//native SetVehicleInterior(vehicleid); //Fake native
 #define SetVehicleInterior					LinkVehicleToInterior //Alias
 static MainVehicle_SpawnInterior[MAX_VEHICLES] = {INVALID_INTERIOR_ID, ...};
 
@@ -101,6 +102,7 @@ static MainVehicle_SpawnInterior[MAX_VEHICLES] = {INVALID_INTERIOR_ID, ...};
  */
 #define INVALID_PAINTJOB_ID					-1
 #define PAINTJOB_NONE						3
+//native SetVehiclePaintjob(vehicleid, paintjobid); //Fake native
 #define SetVehiclePaintjob					ChangeVehiclePaintjob //Alias
 static MainVehicle_SpawnPaintjob[MAX_VEHICLES] = {INVALID_PAINTJOB_ID, ...};
 
@@ -127,12 +129,19 @@ static MainVehicle_SpawnPaintjob[MAX_VEHICLES] = {INVALID_PAINTJOB_ID, ...};
  * 		-MP2: http://forum.sa-mp.com/showthread.php?t=339088
  */
 #define INVALID_VEHICLE_COLOR_ID			-2 //-1 is used for synced random SP colours
+//native ChangeVehicleColors(vehicleid, color1, color2); //Fake native
 #define ChangeVehicleColors					ChangeVehicleColor //Alias
+//native ChangeVehicleColour(vehicleid, color1, color2); //Fake native
 #define ChangeVehicleColour					ChangeVehicleColor //Alias
+//native ChangeVehicleColours(vehicleid, color1, color2); //Fake native
 #define ChangeVehicleColours				ChangeVehicleColor //Alias
+//native SetVehicleColor(vehicleid, color1, color2); //Fake native
 #define SetVehicleColor						ChangeVehicleColor //Alias
+//native SetVehicleColors(vehicleid, color1, color2); //Fake native
 #define SetVehicleColors					ChangeVehicleColor //Alias
+//native SetVehicleColour(vehicleid, color1, color2); //Fake native
 #define SetVehicleColour					ChangeVehicleColor //Alias
+//native SetVehicleColours(vehicleid, color1, color2); //Fake native
 #define SetVehicleColours					ChangeVehicleColor //Alias
 static MainVehicle_SpawnColours[MAX_VEHICLES][2];
 static const MainVehicle_SPColours[][] = { //Data from singleplayer in pairs
@@ -1061,7 +1070,7 @@ stock MainVehicle_ChangeVehicleColor(vehicleid, color1, color2) {
 #endif
 #define ChangeVehicleColor MainVehicle_ChangeVehicleColor
 
-stock MainVehicle_CreateVehicleEx(vehicletype, Float:x, Float:y, Float:z, Float:rotation, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = false, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
+stock MainVehicle_CreateVehicle(vehicletype, Float:x, Float:y, Float:z, Float:rotation, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = false, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
 	new vehicleid;
 	if(GetVehicleModelType(vehicletype) == VEHICLE_TYPE_TRAIN) { //TRAINS
 		vehicleid = AddStaticVehicleEx(vehicletype, x, y, z, rotation, color1, color2, respawn_delay, addsiren);
@@ -1095,7 +1104,7 @@ stock MainVehicle_CreateVehicleEx(vehicletype, Float:x, Float:y, Float:z, Float:
 #else
 	#define _ALS_CreateVehicle
 #endif
-#define CreateVehicle MainVehicle_CreateVehicleEx
+#define CreateVehicle MainVehicle_CreateVehicle
 
 stock MainVehicle_AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = false, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
 	return CreateVehicle(modelid, spawn_x, spawn_y, spawn_z, z_angle, color1, color2, respawn_delay, addsiren, worldid, interiorid, paintjobid);
