@@ -123,6 +123,30 @@ static MainAudioStream_ExitScript() {
 #endif
 
 //========================================HOOKED FUNCTIONS========================================
+//PLAY AUDIO STREAM FOR PLAYER
+/**
+ * -DESCRIPTION:
+ * 		-Play an audio stream for a player and automatically stop it after it has finished.
+ * -PARAMETERS:
+ * 		-playerid: The ID of the player to play the audio stream for.
+ * 		-const url[]: The URL of the audio stream to play for the player.
+ * 		-Float:posX: The X coordinate at which to play the audio stream for the player.
+ * 		 	-Defaults to 0.0.
+ * 		-Float:posY: The Y coordinate at which to play the audio stream for the player.
+ * 		 	-Defaults to 0.0.
+ * 		-Float:posZ: The Z coordinate at which to play the audio stream for the player.
+ * 		 	-Defaults to 0.0.
+ * 		-Float:distance: The distance over which the audio stream will be heard.
+ * 		 	-Defaults to 50.0.
+ * 		-usepos: Whether to use the position coordinates and distance or not.
+ * 		 	-Defaults to 0.
+ * 		-time: The duration of the audio stream.
+ * 		 	-Defaults to -1.
+ * -RETURN VALUES:
+ * 		-1: The function executed successfully.
+ * 		-0: The function failed to execute. An invalid playerid was given.
+ */
+//native PlayAudioStreamForPlayer(playerid, const url[], Float:posX = 0.0, Float:posY = 0.0, Float:posZ = 0.0, Float:distance = 50.0, usepos = 0, time = -1); //Fake native
 stock MainAudioStream_PlayAudioStream(playerid, const url[], Float:posX = 0.0, Float:posY = 0.0, Float:posZ = 0.0, Float:distance = 50.0, usepos = 0, time = -1) {
 	new ret = PlayAudioStreamForPlayer(playerid, url, posX, posY, posZ, distance, usepos);
 	if(ret == 1) {
@@ -145,6 +169,16 @@ stock MainAudioStream_PlayAudioStream(playerid, const url[], Float:posX = 0.0, F
 #endif
 #define PlayAudioStreamForPlayer MainAudioStream_PlayAudioStream
 
+//STOP AUDIO STREAM FOR PLAYER
+/**
+ * -DESCRIPTION:
+ * 		-Stop the current audio stream for a player and kill the duration timer.
+ * -PARAMETERS:
+ * 		-playerid: The ID of the player to stop the audio stream for.
+ * -RETURN VALUES:
+ * 		-This function doesn't return anything.
+ */
+//native StopAudioStreamForPlayer(playerid); //Fake native
 stock MainAudioStream_StopAudioStream(playerid) {
 	//DURATION
 	if(IsPlayerInAnyVehicle(playerid)) {

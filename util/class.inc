@@ -234,6 +234,37 @@ public OnPlayerSpawn(playerid)
 #endif
 
 //========================================HOOKED FUNCTIONS========================================
+//ADD PLAYER CLASS EX
+/**
+ * -DESCRIPTION:
+ * 		-Add a class to class selection with team, spawn world and spawn interior.
+ * -PARAMETERS:
+ * 		-teamid: The team the player will spawn in.
+ * 		-modelid: The skin the player will spawn with.
+ * 		-Float:spawn_x: The X coordinate the player will spawn at.
+ * 		-Float:spawn_y: The Y coordinate the player will spawn at.
+ * 		-Float:spawn_z: The Z coordinate the player will spawn at.
+ * 		-Float:z_angle: The facing angle the player will spawn with.
+ * 		-weapon1: The first weapon the player will spawn with.
+ * 		 	-Defaults to 0.
+ * 		-weapon1_ammo: The ammo for the first weapon the player will spawn with.
+ * 		 	-Defaults to 0.
+ * 		-weapon2: The second weapon the player will spawn with.
+ * 		 	-Defaults to 0.
+ * 		-weapon2_ammo: The ammo for the second weapon the player will spawn with.
+ * 		 	-Defaults to 0.
+ * 		-weapon3: The third weapon the player will spawn with.
+ * 		 	-Defaults to 0.
+ * 		-weapon3_ammo: The ammo for the third weapon the player will spawn with.
+ * 		 	-Defaults to 0.
+ * 		-worldid: The world the player will spawn in.
+ * 		 	-Defaults to VIRTUAL_WORLD_NORMAL.
+ * 		-interiorid: The interior the player will spawn in.
+ * 		 	-Defaults to INTERIOR_NORMAL.
+ * -RETURN VALUES:
+ * 		-valid classid: The function executed successfully.
+ */
+//native AddPlayerClassEx(teamid, modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapon3_ammo = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL); //Fake native
 stock MainClass_AddPlayerClassEx(teamid, modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle,
 weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapon3_ammo = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL) {
 	new classid = AddPlayerClassEx(teamid, modelid, spawn_x, spawn_y, spawn_z, z_angle, weapon1, weapon1_ammo, weapon2, weapon2_ammo, weapon3, weapon3_ammo);
@@ -253,6 +284,38 @@ weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapo
 #endif
 #define AddPlayerClassEx MainClass_AddPlayerClassEx
 
+//ADD PLAYER CLASS
+/**
+ * -DESCRIPTION:
+ * 		-Add a class to class selection with team, spawn world and spawn interior.
+ * -PARAMETERS:
+ * 		-modelid: The skin the player will spawn with.
+ * 		-Float:spawn_x: The X coordinate the player will spawn at.
+ * 		-Float:spawn_y: The Y coordinate the player will spawn at.
+ * 		-Float:spawn_z: The Z coordinate the player will spawn at.
+ * 		-Float:z_angle: The facing angle the player will spawn with.
+ * 		-weapon1: The first weapon the player will spawn with.
+ * 		 	-Defaults to 0.
+ * 		-weapon1_ammo: The ammo for the first weapon the player will spawn with.
+ * 		 	-Defaults to 0.
+ * 		-weapon2: The second weapon the player will spawn with.
+ * 		 	-Defaults to 0.
+ * 		-weapon2_ammo: The ammo for the second weapon the player will spawn with.
+ * 		 	-Defaults to 0.
+ * 		-weapon3: The third weapon the player will spawn with.
+ * 		 	-Defaults to 0.
+ * 		-weapon3_ammo: The ammo for the third weapon the player will spawn with.
+ * 		 	-Defaults to 0.
+ * 		-teamid: The team the player will spawn in.
+ * 		 	-Defaults to NO_TEAM.
+ * 		-worldid: The world the player will spawn in.
+ * 		 	-Defaults to VIRTUAL_WORLD_NORMAL.
+ * 		-interiorid: The interior the player will spawn in.
+ * 		 	-Defaults to INTERIOR_NORMAL.
+ * -RETURN VALUES:
+ * 		-valid classid: The function executed successfully.
+ */
+//native AddPlayerClass(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapon3_ammo = 0, teamid = NO_TEAM, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL); //Fake native
 stock MainClass_AddPlayerClass(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle,
 weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapon3_ammo = 0, teamid = NO_TEAM, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL) {
 	return AddPlayerClassEx(teamid, modelid, spawn_x, spawn_y, spawn_z, z_angle, weapon1, weapon1_ammo, weapon2, weapon2_ammo, weapon3, weapon3_ammo, worldid, interiorid);

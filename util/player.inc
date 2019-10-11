@@ -318,12 +318,12 @@ public OnPlayerUpdate(playerid)
 //SET PLAYER POSITION
 /**
  * -DESCRIPTION:
- * 		-Preload streamed items when setting a player's position.
+ * 		-Set a player's position and preload streamed items.
  * -PARAMETERS:
  * 		-playerid: The ID of the player to set the position of.
  * 		-Float:x: The X coordinate to position the player at.
- * 		-Float:x: The Y coordinate to position the player at.
- * 		-Float:x: The Z coordinate to position the player at.
+ * 		-Float:y: The Y coordinate to position the player at.
+ * 		-Float:z: The Z coordinate to position the player at.
  * 		-bool:preload: Whether to preload streamed items or not.
  * 		 	-Defaults to false.
  * -RETURN VALUES:

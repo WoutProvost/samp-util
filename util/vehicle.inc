@@ -1028,6 +1028,19 @@ public OnVehicleSpawn(vehicleid)
 #endif
 
 //========================================HOOKED FUNCTIONS========================================
+//CHANGE VEHICLE COLOR
+/**
+ * -DESCRIPTION:
+ * 		-Change a vehicle's primary and secondary colours with support for synced random singleplayer colours.
+ * -PARAMETERS:
+ * 		-vehicleid: The ID of the vehicle to change the colours of.
+ * 		-color1: The ID of the vehicle's primary colour.
+ * 		-color2: The ID of the vehicle's secondary colour.
+ * -RETURN VALUES:
+ * 		-1: The function executed successfully.
+ * 		-0: The function failed to execute. An invalid vehcleid was given.
+ */
+//native ChangeVehicleColor(vehicleid, color1, color2); //Fake native
 stock MainVehicle_ChangeVehicleColor(vehicleid, color1, color2) {
 	new c1 = color1;
 	new c2 = color2;
@@ -1070,7 +1083,37 @@ stock MainVehicle_ChangeVehicleColor(vehicleid, color1, color2) {
 #endif
 #define ChangeVehicleColor MainVehicle_ChangeVehicleColor
 
-stock MainVehicle_CreateVehicle(vehicletype, Float:x, Float:y, Float:z, Float:rotation, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = false, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
+//CREATE VEHICLE
+/**
+ * -DESCRIPTION:
+ * 		-Create a vehicle with spawn world, spawn interior and spawn paintjob.
+ * -PARAMETERS:
+ * 		-vehicletype: The model the vehicle will spawn with.
+ * 		-Float:x: The X coordinate the vehicle will spawn at.
+ * 		-Float:y: The Y coordinate the vehicle will spawn at.
+ * 		-Float:e: The Z coordinate the vehicle will spawn at.
+ * 		-Float:rotation: The facing angle the vehicle will spawn with.
+ * 		-color1: The primary colour the vehicle will spawn with.
+ * 		 	-Defaults to -1.
+ * 		-color2: The secondary colour the vehicle will spawn with.
+ * 		 	-Defaults to -1.
+ * 		-respawn_delay: The delay until the vehicle is respawned when unoccupied.
+ * 		 	-Defaults to 0.
+ * 		-addsiren: Whether to add a siren or not.
+ * 		 	-Defaults to 0.
+ * 		-worldid: The world the vehicle will spawn in.
+ * 		 	-Defaults to VIRTUAL_WORLD_NORMAL.
+ * 		-interiorid: The interior the vehicle will spawn in.
+ * 		 	-Defaults to INTERIOR_NORMAL.
+ * 		-paintjobid: The paintjob the vehicle will spawn with.
+ * 		 	-Defaults to PAINTJOB_NONE.
+ * -RETURN VALUES:
+ * 		-valid vehicleid: The function executed successfully.
+ * 		-INVALID_VEHICLE_ID: The function failed to execute. An invalid modelid was given or the vehicle limit was reached.
+ * 		-0: The function failed to execute. One of the modelids 537 or 538 was given.
+ */
+//native CreateVehicle(vehicletype, Float:x, Float:y, Float:z, Float:rotation, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE); //Fake native
+stock MainVehicle_CreateVehicle(vehicletype, Float:x, Float:y, Float:z, Float:rotation, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
 	new vehicleid;
 	if(GetVehicleModelType(vehicletype) == VEHICLE_TYPE_TRAIN) { //TRAINS
 		vehicleid = AddStaticVehicleEx(vehicletype, x, y, z, rotation, color1, color2, respawn_delay, addsiren);
@@ -1106,7 +1149,36 @@ stock MainVehicle_CreateVehicle(vehicletype, Float:x, Float:y, Float:z, Float:ro
 #endif
 #define CreateVehicle MainVehicle_CreateVehicle
 
-stock MainVehicle_AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = false, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
+//ADD STATIC VEHICLE EX
+/**
+ * -DESCRIPTION:
+ * 		-Add a static vehicle with respawn delay, siren, spawn world, spawn interior and spawn paintjob.
+ * -PARAMETERS:
+ * 		-modelid: The model the vehicle will spawn with.
+ * 		-Float:spawn_x: The X coordinate the vehicle will spawn at.
+ * 		-Float:spawn_y: The Y coordinate the vehicle will spawn at.
+ * 		-Float:spawn_z: The Z coordinate the vehicle will spawn at.
+ * 		-Float:z_angle: The facing angle the vehicle will spawn with.
+ * 		-color1: The primary colour the vehicle will spawn with.
+ * 		 	-Defaults to -1.
+ * 		-color2: The secondary colour the vehicle will spawn with.
+ * 		 	-Defaults to -1.
+ * 		-respawn_delay: The delay until the vehicle is respawned when unoccupied.
+ * 		 	-Defaults to 0.
+ * 		-addsiren: Whether to add a siren or not.
+ * 		 	-Defaults to 0.
+ * 		-worldid: The world the vehicle will spawn in.
+ * 		 	-Defaults to VIRTUAL_WORLD_NORMAL.
+ * 		-interiorid: The interior the vehicle will spawn in.
+ * 		 	-Defaults to INTERIOR_NORMAL.
+ * 		-paintjobid: The paintjob the vehicle will spawn with.
+ * 		 	-Defaults to PAINTJOB_NONE.
+ * -RETURN VALUES:
+ * 		-valid vehicleid: The function executed successfully.
+ * 		-INVALID_VEHICLE_ID: The function failed to execute. An invalid modelid was given or the vehicle limit was reached.
+ */
+//native AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE); //Fake native
+stock MainVehicle_AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
 	return CreateVehicle(modelid, spawn_x, spawn_y, spawn_z, z_angle, color1, color2, respawn_delay, addsiren, worldid, interiorid, paintjobid);
 }
 #if defined _ALS_AddStaticVehicleEx
@@ -1116,7 +1188,36 @@ stock MainVehicle_AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Floa
 #endif
 #define AddStaticVehicleEx MainVehicle_AddStaticVehicleEx
 
-stock MainVehicle_AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = false, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
+//ADD STATIC VEHICLE
+/**
+ * -DESCRIPTION:
+ * 		-Add a static vehicle with respawn delay, siren, spawn world, spawn interior and spawn paintjob.
+ * -PARAMETERS:
+ * 		-modelid: The model the vehicle will spawn with.
+ * 		-Float:spawn_x: The X coordinate the vehicle will spawn at.
+ * 		-Float:spawn_y: The Y coordinate the vehicle will spawn at.
+ * 		-Float:spawn_z: The Z coordinate the vehicle will spawn at.
+ * 		-Float:z_angle: The facing angle the vehicle will spawn with.
+ * 		-color1: The primary colour the vehicle will spawn with.
+ * 		 	-Defaults to -1.
+ * 		-color2: The secondary colour the vehicle will spawn with.
+ * 		 	-Defaults to -1.
+ * 		-respawn_delay: The delay until the vehicle is respawned when unoccupied.
+ * 		 	-Defaults to 0.
+ * 		-addsiren: Whether to add a siren or not.
+ * 		 	-Defaults to 0.
+ * 		-worldid: The world the vehicle will spawn in.
+ * 		 	-Defaults to VIRTUAL_WORLD_NORMAL.
+ * 		-interiorid: The interior the vehicle will spawn in.
+ * 		 	-Defaults to INTERIOR_NORMAL.
+ * 		-paintjobid: The paintjob the vehicle will spawn with.
+ * 		 	-Defaults to PAINTJOB_NONE.
+ * -RETURN VALUES:
+ * 		-valid vehicleid: The function executed successfully.
+ * 		-INVALID_VEHICLE_ID: The function failed to execute. An invalid modelid was given or the vehicle limit was reached.
+ */
+//native AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE); //Fake native
+stock MainVehicle_AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
 	return CreateVehicle(modelid, spawn_x, spawn_y, spawn_z, z_angle, color1, color2, respawn_delay, addsiren, worldid, interiorid, paintjobid);
 }
 #if defined _ALS_AddStaticVehicle
@@ -1126,6 +1227,17 @@ stock MainVehicle_AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:
 #endif
 #define AddStaticVehicle MainVehicle_AddStaticVehicle
 
+//DESTROY VEHICLE
+/**
+ * -DESCRIPTION:
+ * 		-Destroy a vehicle and reset spawn world, spawn interior, spawn paintjob and synced random singleplayer colours.
+ * -PARAMETERS:
+ * 		-vehicled: The ID of the vehicle to destroy.
+ * -RETURN VALUES:
+ * 		-1: The function executed successfully.
+ * 		-0: The function failed to execute. An invalid vehicleid was given.
+ */
+//native DestroyVehicle(vehicleid); //Fake native
 stock MainVehicle_DestroyVehicle(vehicleid) {
 	if(IsValidVehicle(vehicleid)) {
 		//SPAWN WORLDS

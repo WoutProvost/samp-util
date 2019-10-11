@@ -15,19 +15,19 @@
 //INFINITY INTEGER
 /**
  * -DESCRIPTION:
- * 		-Largest signed 32-bit integer.
+ * 		-Largest signed 32-bit integer (2147483647).
  */
 #if !defined INFINITY
-	#define INFINITY							2147483647
+	#define INFINITY							cellmax
 #endif
 
 //NEGATIVE INFINITY INTEGER
 /**
  * -DESCRIPTION:
- * 		-Smallest signed 32-bit integer.
+ * 		-Smallest signed 32-bit integer (-2147483648).
  */
 #if !defined NEG_INFINITY
-	#define NEG_INFINITY						-2147483648
+	#define NEG_INFINITY						cellmin
 #endif
 
 //INFINITY FLOAT
