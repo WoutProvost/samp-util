@@ -38,8 +38,8 @@ Detailed documentation is provided in the include files.
 ### Math.inc
 ```pawn
 #define PI						(Float:3.14159265)
-#define INFINITY					2147483647
-#define NEG_INFINITY					-2147483648
+#define INFINITY					cellmax // = 2147483647
+#define NEG_INFINITY					cellmin // = -2147483648
 #define FLOAT_INFINITY					(Float:0x7F800000)
 #define FLOAT_NEG_INFINITY				(Float:0xFF800000)
 #define FLOAT_NAN					(Float:0x7FFFFFFF)
