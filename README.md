@@ -90,13 +90,42 @@ GetMonthShortName(month, name[], len);
 #define INVALID_AREA_ID					-1
 #define INVALID_TIMER_ID				-1
 ```
+### Limit.inc
+```pawn
+#define MAX_CHECKPOINTS						1
+#define MAX_RACE_CHECKPOINTS				1
+#define MAX_MAPICONS						100
+#define MAX_OBJECT_MATERIAL_TEXT			2048
+#define MAX_PLAYER_VARIABLES				800
+#define MAX_GAMEMODES						16
+#define MAX_FILTERSCRIPTS					16
+```
+### Textdraw.inc
+```pawn
+#define MAX_TEXT_DRAW_TEXT					1024
+#define MAX_TEXT_DRAWS_SHOWN				MAX_TEXT_DRAWS+MAX_PLAYER_TEXT_DRAWS
+#define MAX_TEXT_DRAW_SPRITES_SHOWN			100
+```
+### Dialog.inc
+```pawn
+#define MAX_DIALOGS							32768
+#define MAX_DIALOG_CAPTION					64
+#define MAX_DIALOG_INFO						4096
+#define MAX_DIALOG_BUTTON_TEXT				10
+#define MAX_DIALOG_INPUT					128
+#define MAX_DIALOG_COLUMNS					4
+#define MAX_DIALOG_COLUMN_NAME				128
+#define MAX_DIALOG_ROW_TEXT					256
+```
 ### Virtualworld.inc
 ```pawn
+#define MAX_VIRTUAL_WORLDS						cellmax // = 2147483647
 #define INVALID_VIRTUAL_WORLD_ID			-1
 #define VIRTUAL_WORLD_NORMAL				0
 ```
 ### Interior.inc
 ```pawn
+#define MAX_INTERIORS						256
 #define INVALID_INTERIOR_ID				-1
 #define INTERIOR_NORMAL					0
 ```
@@ -126,6 +155,7 @@ AddPlayerClass(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_ang
 ```
 ### Vehicle.inc
 ```pawn
+#define MAX_VEHICLE_MODELS					212
 #define INVALID_PAINTJOB_ID				-1
 #define PAINTJOB_NONE					3
 #define INVALID_VEHICLE_COLOR_ID			-2

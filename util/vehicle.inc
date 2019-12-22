@@ -3,6 +3,13 @@
 #endif
 #define _mainvehicle_included
 
+//VEHICLE MODEL AMOUNT LIMIT
+/**
+ * -DESCRIPTION:
+ * 		-Defines the vehicle model amount limit.
+ */
+#define MAX_VEHICLE_MODELS					212
+
 //IS VALID VEHICLE
 /**
  * -DESCRIPTION:

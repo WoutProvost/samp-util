@@ -3,6 +3,13 @@
 #endif
 #define _mainvirtualworld_included
 
+//VIRTUAL WORLD AMOUNT LIMIT
+/**
+ * -DESCRIPTION:
+ * 		-Defines the virtual world amount limit (2147483647).
+ */
+#define MAX_VIRTUAL_WORLDS					cellmax
+
 //INVALID VIRTUAL WORLD
 /**
  * -DESCRIPTION:

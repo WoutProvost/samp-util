@@ -3,6 +3,13 @@
 #endif
 #define _maininterior_included
 
+//INTERIOR AMOUNT LIMIT
+/**
+ * -DESCRIPTION:
+ * 		-Defines the interior amount limit.
+ */
+#define MAX_INTERIORS						256
+
 //INVALID INTERIOR
 /**
  * -DESCRIPTION:
