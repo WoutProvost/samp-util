@@ -54,7 +54,7 @@ GetPointOnEdgeOfCircle(&Float:x, &Float:y, Float:r, Float:a, bool:isGTAAngle = f
 
 strtok(const string[], &index, delimiter = ' ');
 strrest(const string[], &index, delimiter = ' ');
-strcpy(dest[], const source[], len);
+strcpy(dest[], const source[], len = sizeof(dest));
 strclr(string[]);
 bool:strempty(const string[]);
 strcount(const string[], character);
@@ -229,6 +229,7 @@ forward OnPlayerVirtualWorldChange(playerid, newvirtualworldid, oldvirtualworldi
 
 GetWeaponModel(weaponid);
 Float:GetWeaponVehicleDamage(weaponid);
+bool:IsMeleeWeapon(weaponid);
 GetWeaponName(weaponid, name[], len);
 ```
 ### Audiostream.inc
