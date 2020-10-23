@@ -111,6 +111,24 @@ stock Float:GetWeaponVehicleDamage(weaponid) {
 	return damage;
 }
 
+//IS MELEE WEAPON
+/**
+ * -DESCRIPTION:
+ * 		-Get whether a weapon is a melee weapon.
+ * -PARAMETERS:
+ * 		-weaponid: The ID of the weapon to get whether it is a melee weapon.
+ * -RETURN VALUES:
+ * 		-true: The function executed successfully. The weapon is a melee weapon.
+ * 		-false: The function executed successfully. The weapon is not a melee weapon.
+ */
+//native bool:IsMeleeWeapon(weaponid); //Fake native
+stock bool:IsMeleeWeapon(weaponid) {
+	if(weaponid >= 0 && weaponid <= 15) {
+		return true;
+	}
+	return false;
+}
+
 //========================================HOOKED FUNCTIONS========================================
 //GET WEAPON NAME
 /**
