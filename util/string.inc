@@ -91,11 +91,13 @@ stock strrest(const string[], &index, delimiter = ' ') {
  * 		-length of the new destination string: The function executed successfully.
  * -CREDITS:
  * 		-Y_Less: http://forum.sa-mp.com/showpost.php?p=94960&postcount=2
+ * 		-Converted from preprocessor constant to function by Freaksken.
  */
-//native strcpy(dest[], const source[], len); //Fake native
-#if !defined strcpy
-	#define strcpy(%0,%1,%2) strcat((%0[0] = '\0', %0), %1, %2)
-#endif
+//native strcpy(dest[], const source[], len = sizeof(dest)); //Fake native
+stock strcpy(dest[], const source[], len = sizeof(dest)) {
+	dest[0] = '\0';
+	return strcat(dest, source, len);
+}
 
 //STRING CLEAR
 /**
@@ -107,9 +109,9 @@ stock strrest(const string[], &index, delimiter = ' ') {
  * 		-This function doesn't return anything.
  */
 //native strclr(string[]); //Fake native
- #if !defined strclr
- 	#define strclr(%0) (%0[0] = '\0')
-#endif
+stock strclr(string[]) {
+	string[0] = '\0';
+}
 
 //STRING IS EMPTY
 /**
@@ -124,12 +126,15 @@ stock strrest(const string[], &index, delimiter = ' ') {
  * 		-Due to the way the PAWN VM works, strings passed by CallRemoteFunction and CallLocalFunction MUST NOT have 0 length, so empty strings are passed as "\1\0" (i.e. character 1 (SOH), character 0 (NULL)).
  * -CREDITS:
  * 		-Y_Less: http://forum.sa-mp.com/showpost.php?p=94960&postcount=2
- * 		-Name changed by Freaksken, originally called isnull.
+ * 		-Converted from preprocessor constant to function and name changed by Freaksken, originally called isnull.
  */
 //native bool:strempty(const string[]); //Fake native
-#if !defined strempty
-	#define strempty(%1) ((!(%1[0])) || (((%1[0]) == '\1') && (!(%1[1]))))
-#endif
+stock bool:strempty(const string[]) {
+	if(string[0] == '\0' || (string[0] == '\1' && string[1] == '\0')) {
+		return true;
+	}
+	return false;
+}
 
 //STRING COUNT
 /**
