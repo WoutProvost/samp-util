@@ -1,7 +1,6 @@
 {
 	"user": "WoutProvost",
 	"repo": "samp-util",
-	"website": "https://github.com/WoutProvost/samp-util",
 	"entry": "test.pwn",
 	"output": "test.amx",
 	"dependencies": [
