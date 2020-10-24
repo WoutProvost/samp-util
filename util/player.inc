@@ -151,30 +151,25 @@ stock bool:IsPlayerInNormalWorld(playerid) {
  * 		-This callback doesn't handle returns.
  * -NOTES:
  * 		-Doesn't get called when the player is intializing (change from INVALID_VIRTUAL_WORLD_ID to a valid virtual world).
- * 		-The gamemode handles all players, also those created in other scripts.
  * 		-OnPlayerUpdate hooked instead of hooking SetPlayerVirtualWorld, because there is a delay until the player actually changes virtual worlds.
  */
 forward OnPlayerVirtualWorldChange(playerid, newvirtualworldid, oldvirtualworldid);
-#if !defined FILTERSCRIPT
-	static MainPlayer_ChangeWorld[MAX_PLAYERS] = {INVALID_VIRTUAL_WORLD_ID, ...};
-#endif
+static MainPlayer_ChangeWorld[MAX_PLAYERS] = {INVALID_VIRTUAL_WORLD_ID, ...};
 
 //========================================INTERNAL FUNCTIONS========================================
 static MainPlayer_InitScript() {
 	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) { //Using MAX_PLAYERS instead of GetPlayerPoolSize because we need to initialize the variables of all possible player IDs
-		#if !defined FILTERSCRIPT
-			//ON PLAYER VIRTUAL WORLD CHANGE
-			MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
-		#endif
+		//ON PLAYER VIRTUAL WORLD CHANGE
+		MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
+
 	}
 }
 
 static MainPlayer_ExitScript() {
 	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) { //Using MAX_PLAYERS insteaf of GetPlayerPoolSize because we need to reset the variables of all possible player IDs
-		#if !defined FILTERSCRIPT
-			//ON PLAYER VIRTUAL WORLD CHANGE
-			MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
-		#endif
+		//ON PLAYER VIRTUAL WORLD CHANGE
+		MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
+
 	}
 }
 
@@ -263,10 +258,9 @@ static MainPlayer_ExitScript() {
 
 public OnPlayerDisconnect(playerid, reason)
 {
-	#if !defined FILTERSCRIPT
-		//ON PLAYER VIRTUAL WORLD CHANGE
-		MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
-	#endif
+	//ON PLAYER VIRTUAL WORLD CHANGE
+	MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
+
 
 	new ret = 1;
 	#if defined MainPlayer_OnPlayerDisconnect
@@ -286,17 +280,16 @@ public OnPlayerDisconnect(playerid, reason)
 
 public OnPlayerUpdate(playerid)
 {
-	#if !defined FILTERSCRIPT
-		//ON PLAYER VIRTUAL WORLD CHANGE
-		new newWorld = GetPlayerVirtualWorld(playerid);
-		new oldWorld = MainPlayer_ChangeWorld[playerid];
-		if(newWorld != oldWorld) {
-			MainPlayer_ChangeWorld[playerid] = newWorld;
-			if(oldWorld != INVALID_VIRTUAL_WORLD_ID) { //Don't call when the player is initializing
-				CallRemoteFunction("OnPlayerVirtualWorldChange", "iii", playerid, newWorld, oldWorld);
-			}
+	//ON PLAYER VIRTUAL WORLD CHANGE
+	new newWorld = GetPlayerVirtualWorld(playerid);
+	new oldWorld = MainPlayer_ChangeWorld[playerid];
+	if(newWorld != oldWorld) {
+		MainPlayer_ChangeWorld[playerid] = newWorld;
+		if(oldWorld != INVALID_VIRTUAL_WORLD_ID) { //Don't call when the player is initializing
+			CallLocalFunction("OnPlayerVirtualWorldChange", "iii", playerid, newWorld, oldWorld);
 		}
-	#endif
+	}
+
 
 	new ret = 1;
 	#if defined MainPlayer_OnPlayerUpdate

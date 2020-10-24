@@ -378,13 +378,10 @@ static const MainVehicle_SPColours[][] = { //Data from singleplayer in pairs
  * 		-This callback doesn't handle returns.
  * -NOTES:
  * 		-Doesn't get called when the vehicle is intializing (change from INVALID_VIRTUAL_WORLD_ID to a valid virtual world).
- * 		-The gamemode handles all vehicles, also those created in other scripts.
  * 		-Timer used instead of hooking SetVehicleVirtualWorld, because there is a delay until the vehicle actually changes virtual worlds.
  */
 forward OnVehicleVirtualWorldChange(vehicleid, newvirtualworldid, oldvirtualworldid);
-#if !defined FILTERSCRIPT
-	static MainVehicle_ChangeWorld[MAX_VEHICLES] = {INVALID_VIRTUAL_WORLD_ID, ...};
-#endif
+static MainVehicle_ChangeWorld[MAX_VEHICLES] = {INVALID_VIRTUAL_WORLD_ID, ...};
 
 //ON VEHICLE INTERIOR CHANGE
 /**
@@ -398,14 +395,11 @@ forward OnVehicleVirtualWorldChange(vehicleid, newvirtualworldid, oldvirtualworl
  * 		-This callback doesn't handle returns.
  * -NOTES:
  * 		-Doesn't get called when the vehicle is intializing (change from INVALID_INTERIOR_ID to a valid interior).
- * 		-The gamemode handles all vehicles, also those created in other scripts.
  * 		-Timer used instead of hooking SetVehicleInterior, because there is a delay until the vehicle actually changes interiors.
  */
 forward OnVehicleInteriorChange(vehicleid, newinteriorid, oldinteriorid);
-#if !defined FILTERSCRIPT
-	static MainVehicle_ChangeInterior[MAX_VEHICLES] = {INVALID_INTERIOR_ID, ...};
-	static MainVehicle_ChangeWITimer = INVALID_TIMER_ID;
-#endif
+static MainVehicle_ChangeInterior[MAX_VEHICLES] = {INVALID_INTERIOR_ID, ...};
+static MainVehicle_ChangeWITimer = INVALID_TIMER_ID;
 
 //NAMES
 /**
@@ -876,19 +870,15 @@ static MainVehicle_InitScript() {
 		MainVehicle_SpawnColours[vehicleid][0] = INVALID_VEHICLE_COLOR_ID;
 		MainVehicle_SpawnColours[vehicleid][1] = INVALID_VEHICLE_COLOR_ID;
 
-		#if !defined FILTERSCRIPT
-			//ON VEHICLE VIRTUAL WORLD CHANGE
-			MainVehicle_ChangeWorld[vehicleid] = INVALID_VIRTUAL_WORLD_ID;
+		//ON VEHICLE VIRTUAL WORLD CHANGE
+		MainVehicle_ChangeWorld[vehicleid] = INVALID_VIRTUAL_WORLD_ID;
 
-			//ON VEHICLE INTERIOR CHANGE
-			MainVehicle_ChangeInterior[vehicleid] = INVALID_INTERIOR_ID;
-		#endif
+		//ON VEHICLE INTERIOR CHANGE
+		MainVehicle_ChangeInterior[vehicleid] = INVALID_INTERIOR_ID;
 	}
 
-	#if !defined FILTERSCRIPT
-		//ON VEHICLE VIRTUAL WORLD CHANGE //ON VEHICLE INTERIOR CHANGE
-		MainVehicle_ChangeWITimer = SetTimer("MainVehicle_ChangeWI", 100, true);
-	#endif
+	//ON VEHICLE VIRTUAL WORLD CHANGE //ON VEHICLE INTERIOR CHANGE
+	MainVehicle_ChangeWITimer = SetTimer("MainVehicle_ChangeWI", 100, true);
 }
 
 static MainVehicle_ExitScript() {
@@ -906,20 +896,16 @@ static MainVehicle_ExitScript() {
 		MainVehicle_SpawnColours[vehicleid][0] = INVALID_VEHICLE_COLOR_ID;
 		MainVehicle_SpawnColours[vehicleid][1] = INVALID_VEHICLE_COLOR_ID;
 
-		#if !defined FILTERSCRIPT
-			//ON VEHICLE VIRTUAL WORLD CHANGE
-			MainVehicle_ChangeWorld[vehicleid] = INVALID_VIRTUAL_WORLD_ID;
+		//ON VEHICLE VIRTUAL WORLD CHANGE
+		MainVehicle_ChangeWorld[vehicleid] = INVALID_VIRTUAL_WORLD_ID;
 
-			//ON VEHICLE INTERIOR CHANGE
-			MainVehicle_ChangeInterior[vehicleid] = INVALID_INTERIOR_ID;
-		#endif
+		//ON VEHICLE INTERIOR CHANGE
+		MainVehicle_ChangeInterior[vehicleid] = INVALID_INTERIOR_ID;
 	}
 
-	#if !defined FILTERSCRIPT
-		//ON VEHICLE VIRTUAL WORLD CHANGE //ON VEHICLE INTERIOR CHANGE
-		KillTimer(MainVehicle_ChangeWITimer);
-		MainVehicle_ChangeWITimer = INVALID_TIMER_ID;
-	#endif
+	//ON VEHICLE VIRTUAL WORLD CHANGE //ON VEHICLE INTERIOR CHANGE
+	KillTimer(MainVehicle_ChangeWITimer);
+	MainVehicle_ChangeWITimer = INVALID_TIMER_ID;
 }
 
 //========================================HOOKED CALLBACKS========================================
@@ -1269,13 +1255,11 @@ stock MainVehicle_DestroyVehicle(vehicleid) {
 		MainVehicle_SpawnColours[vehicleid][0] = INVALID_VEHICLE_COLOR_ID;
 		MainVehicle_SpawnColours[vehicleid][1] = INVALID_VEHICLE_COLOR_ID;
 
-		#if !defined FILTERSCRIPT
-			//ON VEHICLE VIRTUAL WORLD CHANGE
-			MainVehicle_ChangeWorld[vehicleid] = INVALID_VIRTUAL_WORLD_ID;
+		//ON VEHICLE VIRTUAL WORLD CHANGE
+		MainVehicle_ChangeWorld[vehicleid] = INVALID_VIRTUAL_WORLD_ID;
 
-			//ON VEHICLE INTERIOR CHANGE
-			MainVehicle_ChangeInterior[vehicleid] = INVALID_INTERIOR_ID;
-		#endif
+		//ON VEHICLE INTERIOR CHANGE
+		MainVehicle_ChangeInterior[vehicleid] = INVALID_INTERIOR_ID;
 	}
 
 	return DestroyVehicle(vehicleid);
@@ -1288,29 +1272,27 @@ stock MainVehicle_DestroyVehicle(vehicleid) {
 #define DestroyVehicle MainVehicle_DestroyVehicle
 
 //========================================TIMERS========================================
-#if !defined FILTERSCRIPT
-	forward MainVehicle_ChangeWI();
-	public MainVehicle_ChangeWI() {
-		for(new vehicleid = 1, highestVehicleid = GetVehiclePoolSize(); vehicleid <= highestVehicleid; vehicleid++) { //Vehicleid start at ID 1
-			if(IsValidVehicle(vehicleid)) {
-				new newWorld = GetVehicleVirtualWorld(vehicleid);
-				new oldWorld = MainVehicle_ChangeWorld[vehicleid];
-				if(newWorld != oldWorld) {
-					MainVehicle_ChangeWorld[vehicleid] = newWorld;
-					if(oldWorld != INVALID_VIRTUAL_WORLD_ID) { //Don't call when the vehicle is initializing
-						CallRemoteFunction("OnVehicleVirtualWorldChange", "iii", vehicleid, newWorld, oldWorld); //ON VEHICLE VIRTUAL WORLD CHANGE
-					}
+forward MainVehicle_ChangeWI();
+public MainVehicle_ChangeWI() {
+	for(new vehicleid = 1, highestVehicleid = GetVehiclePoolSize(); vehicleid <= highestVehicleid; vehicleid++) { //Vehicleid start at ID 1
+		if(IsValidVehicle(vehicleid)) {
+			new newWorld = GetVehicleVirtualWorld(vehicleid);
+			new oldWorld = MainVehicle_ChangeWorld[vehicleid];
+			if(newWorld != oldWorld) {
+				MainVehicle_ChangeWorld[vehicleid] = newWorld;
+				if(oldWorld != INVALID_VIRTUAL_WORLD_ID) { //Don't call when the vehicle is initializing
+					CallLocalFunction("OnVehicleVirtualWorldChange", "iii", vehicleid, newWorld, oldWorld); //ON VEHICLE VIRTUAL WORLD CHANGE
 				}
+			}
 
-				new newInterior = GetVehicleInterior(vehicleid);
-				new oldInterior = MainVehicle_ChangeInterior[vehicleid];
-				if(newInterior != oldInterior) {
-					MainVehicle_ChangeInterior[vehicleid] = newInterior;
-					if(oldInterior != INVALID_INTERIOR_ID) { //Don't call when the vehicle is initializing
-						CallRemoteFunction("OnVehicleInteriorChange", "iii", vehicleid, newInterior, oldInterior); //ON VEHICLE INTERIOR CHANGE
-					}
+			new newInterior = GetVehicleInterior(vehicleid);
+			new oldInterior = MainVehicle_ChangeInterior[vehicleid];
+			if(newInterior != oldInterior) {
+				MainVehicle_ChangeInterior[vehicleid] = newInterior;
+				if(oldInterior != INVALID_INTERIOR_ID) { //Don't call when the vehicle is initializing
+					CallLocalFunction("OnVehicleInteriorChange", "iii", vehicleid, newInterior, oldInterior); //ON VEHICLE INTERIOR CHANGE
 				}
 			}
 		}
 	}
-#endif
+}
