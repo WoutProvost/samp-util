@@ -23,5 +23,7 @@
  */
 //native GetWeather(); //Fake native
 #if !defined GetWeather
-	#define GetWeather() GetConsoleVarAsInt("weather")
+	stock GetWeather() {
+		return GetConsoleVarAsInt("weather");
+	}
 #endif
