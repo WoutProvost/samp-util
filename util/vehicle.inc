@@ -515,12 +515,7 @@ stock GetVehicleModelSeatCount(modelid) {
 //TYPES
 /**
  * -DESCRIPTION:
- * 		-Get a vehicle model's type.
- * -PARAMETERS:
- * 		-modelid: The ID of the vehicle model to get the type of.
- * -RETURN VALUES:
- * 		-valid VEHICLE_TYPE: The function executed successfully.
- * 		-INVALID_VEHICLE_TYPE: The function failed to execute. An invalid vehicle modelid was given.
+ * 		-Vehicle types.
  * -CREDITS:
  * 		-Originally by YellowBlood and Gabriel 'Larcius' Cordes: https://raw.githubusercontent.com/Kaperstone/uf.inc/master/uf.inc
  * 		-Edited by Freaksken.
@@ -542,6 +537,20 @@ enum {
 	VEHICLE_TYPE_TRAIN,
 	VEHICLE_TYPE_TRAILER
 }
+
+//GET VEHICLE MODEL TYPE
+/**
+ * -DESCRIPTION:
+ * 		-Get a vehicle model's type.
+ * -PARAMETERS:
+ * 		-modelid: The ID of the vehicle model to get the type of.
+ * -RETURN VALUES:
+ * 		-valid VEHICLE_TYPE: The function executed successfully.
+ * 		-INVALID_VEHICLE_TYPE: The function failed to execute. An invalid vehicle modelid was given.
+ * -CREDITS:
+ * 		-Originally by YellowBlood and Gabriel 'Larcius' Cordes: https://raw.githubusercontent.com/Kaperstone/uf.inc/master/uf.inc
+ * 		-Edited by Freaksken.
+ */
 //native GetVehicleModelType(modelid); //Fake native
 stock GetVehicleModelType(modelid) {
 	switch(modelid) {
