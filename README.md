@@ -222,6 +222,12 @@ SetPlayerPos(playerid, Float:x, Float:y, Float:z, bool:preload = false);
 
 forward OnPlayerVirtualWorldChange(playerid, newvirtualworldid, oldvirtualworldid);
 ```
+<!--
+bool:IsPlayerPaused(playerid);
+GetPlayerPausedTime(playerid);
+forward OnPlayerPause(playerid);
+forward OnPlayerUnpause(playerid);
+-->
 ### Weapon.inc
 ```pawn
 #define INVALID_WEAPON_ID				-1

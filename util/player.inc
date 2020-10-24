@@ -152,25 +152,141 @@ stock bool:IsPlayerInNormalWorld(playerid) {
  * -NOTES:
  * 		-Doesn't get called when the player is intializing (change from INVALID_VIRTUAL_WORLD_ID to a valid virtual world).
  * 		-OnPlayerUpdate hooked instead of hooking SetPlayerVirtualWorld, because there is a delay until the player actually changes virtual worlds.
+ * 		-The library must be included in the gamemode for this callback to work in any filterscripts!
  */
 forward OnPlayerVirtualWorldChange(playerid, newvirtualworldid, oldvirtualworldid);
-static MainPlayer_ChangeWorld[MAX_PLAYERS] = {INVALID_VIRTUAL_WORLD_ID, ...};
+#if !defined FILTERSCRIPT
+	static MainPlayer_ChangeWorld[MAX_PLAYERS] = {INVALID_VIRTUAL_WORLD_ID, ...};
+#endif
+
+//PAUSE
+/**
+ * -DESCRIPTION:
+ * 		-Store whether a player is paused and the last tick count when that player was still unpaused.
+ * 		-Use a timer to periodically check whether each player is paused or not.
+ */
+// #if !defined FILTERSCRIPT
+// 	static bool:MainPlayer_Paused[MAX_PLAYERS] = {false, ...};
+// 	static MainPlayer_PauseTickCount[MAX_PLAYERS] = {0, ...};
+// 	static MainPlayer_PauseTimer = INVALID_TIMER_ID;
+// #endif
+
+//IS PLAYER PAUSED
+/**
+ * -DESCRIPTION:
+ * 		-Get whether a player is paused.
+ * -PARAMETERS:
+ * 		-playerid: The ID of the player to get whether he is paused.
+ * -RETURN VALUES:
+ * 		-true: The function executed successfully. The player is paused.
+ * 		-false:
+ * 			-The function executed successfully. The player is not paused.
+ * 			-The function failed to execute. An invalid playerid was given.
+ */
+//native bool:IsPlayerPaused(playerid); //Fake native
+// #if !defined FILTERSCRIPT
+// 	#if !defined IsPlayerPaused
+// 		stock bool:IsPlayerPaused(playerid) {
+// 			if(IsPlayerConnected(playerid)) {
+// 				return MainPlayer_Paused[playerid]; //PAUSE
+// 			}
+// 			return false;
+// 		}
+// 	#endif
+// #endif
+
+//GET PLAYER PAUSED TIME
+/**
+ * -DESCRIPTION:
+ * 		-Get the time a player has been paused for in milliseconds.
+ * -PARAMETERS:
+ * 		-playerid: The ID of the player to get the time he has been paused for in milliseconds of.
+ * -RETURN VALUES:
+ * 		-valid time: The function executed successfully.
+ * 		-0:
+ * 			-The function executed successfully. The player is not paused.
+ * 			-The function failed to execute. An invalid playerid was given.
+ */
+//native GetPlayerPausedTime(playerid); //Fake native
+// #if !defined FILTERSCRIPT
+// 	#if !defined GetPlayerPausedTime
+// 		stock GetPlayerPausedTime(playerid) {
+// 			if(IsPlayerConnected(playerid) && MainPlayer_Paused[playerid]) {  //PAUSE
+// 				return GetTickCount() - MainPlayer_PauseTickCount[playerid];
+// 			}
+// 			return 0;
+// 		}
+// 	#endif
+// #endif
+
+//ON PLAYER PAUSE
+/**
+ * -DESCRIPTION:
+ * 		-Gets called when a player pauses the game (opens the game menu or presses ALT-TAB).
+ * -PARAMETERS:
+ * 		-playerid: The ID of the player that paused the game.
+ * -RETURN VALUES:
+ * 		-This callback doesn't handle returns.
+ * -NOTES:
+ * 		-Doesn't get called when the player is intializing, dead or in class selection, due to the way OnPlayerUpdate works.
+ * 		-NPCs are ignored as these can never pause.
+ * 		-The maximum interval between OnPlayerUpdate calls is 1 second. So, to prevent faulty calls a margin of 1 second is added to this interval to a total of 2 seconds.
+ * 		-The library must be included in the gamemode for this callback to work in any filterscripts!
+ */
+// forward OnPlayerPause(playerid);
+
+//ON PLAYER UNPAUSE
+/**
+ * -DESCRIPTION:
+ * 		-Gets called when a player unpauzes the game (closes the game menu).
+ * -PARAMETERS:
+ * 		-playerid: The ID of the player that unpaused the game.
+ * -RETURN VALUES:
+ * 		-This callback doesn't handle returns.
+ * -NOTES:
+ * 		-Doesn't get called when the player is intializing, dead or in class selection, due to the way OnPlayerUpdate works.
+ * 		-NPCs are ignored as these can never pause.
+ * 		-The maximum interval between OnPlayerUpdate calls is 1 second. So, to prevent faulty calls a margin of 1 second is added to this interval to a total of 2 seconds.
+ * 		-The library must be included in the gamemode for this callback to work in any filterscripts!
+ */
+// forward OnPlayerUnpause(playerid);
 
 //========================================INTERNAL FUNCTIONS========================================
 static MainPlayer_InitScript() {
 	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) { //Using MAX_PLAYERS instead of GetPlayerPoolSize because we need to initialize the variables of all possible player IDs
-		//ON PLAYER VIRTUAL WORLD CHANGE
-		MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
+		#if !defined FILTERSCRIPT
+			//ON PLAYER VIRTUAL WORLD CHANGE
+			MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
 
+			//PAUSE
+			// MainPlayer_Paused[playerid] = false;
+			// MainPlayer_PauseTickCount[playerid] = GetTickCount();
+		#endif
 	}
+	
+	// #if !defined FILTERSCRIPT
+	// 	//PAUSE
+	// 	MainPlayer_PauseTimer = SetTimer("MainPlayer_CheckPlayersPaused", 1000, true);
+	// #endif
 }
 
 static MainPlayer_ExitScript() {
 	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) { //Using MAX_PLAYERS insteaf of GetPlayerPoolSize because we need to reset the variables of all possible player IDs
-		//ON PLAYER VIRTUAL WORLD CHANGE
-		MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
+		#if !defined FILTERSCRIPT
+			//ON PLAYER VIRTUAL WORLD CHANGE
+			MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
 
+			//PAUSE
+			// MainPlayer_Paused[playerid] = false;
+			// MainPlayer_PauseTickCount[playerid] = 0;
+		#endif
 	}
+
+	// #if !defined FILTERSCRIPT
+	// 	//PAUSE
+	// 	KillTimer(MainPlayer_PauseTimer);
+	// 	MainPlayer_PauseTimer = INVALID_TIMER_ID;
+	// #endif
 }
 
 //========================================HOOKED CALLBACKS========================================
@@ -256,11 +372,40 @@ static MainPlayer_ExitScript() {
 	#endif
 #endif
 
+// public OnPlayerConnect(playerid)
+// {
+// 	#if !defined FILTERSCRIPT
+// 		//PAUSE
+// 		MainPlayer_Paused[playerid] = false;
+// 		MainPlayer_PauseTickCount[playerid] = GetTickCount();
+// 	#endif
+
+// 	new ret = 1;
+// 	#if defined MainPlayer_OnPlayerConnect
+// 		ret = MainPlayer_OnPlayerConnect(playerid);
+// 	#endif
+// 	return ret;
+// }
+// #if defined _ALS_OnPlayerConnect
+// 	#undef OnPlayerConnect
+// #else
+// 	#define _ALS_OnPlayerConnect
+// #endif
+// #define OnPlayerConnect MainPlayer_OnPlayerConnect
+// #if defined MainPlayer_OnPlayerConnect
+// 	forward MainPlayer_OnPlayerConnect(playerid);
+// #endif
+
 public OnPlayerDisconnect(playerid, reason)
 {
-	//ON PLAYER VIRTUAL WORLD CHANGE
-	MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
+	#if !defined FILTERSCRIPT
+		//ON PLAYER VIRTUAL WORLD CHANGE
+		MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
 
+		//PAUSE
+		// MainPlayer_Paused[playerid] = false;
+		// MainPlayer_PauseTickCount[playerid] = 0;
+	#endif
 
 	new ret = 1;
 	#if defined MainPlayer_OnPlayerDisconnect
@@ -280,16 +425,20 @@ public OnPlayerDisconnect(playerid, reason)
 
 public OnPlayerUpdate(playerid)
 {
-	//ON PLAYER VIRTUAL WORLD CHANGE
-	new newWorld = GetPlayerVirtualWorld(playerid);
-	new oldWorld = MainPlayer_ChangeWorld[playerid];
-	if(newWorld != oldWorld) {
-		MainPlayer_ChangeWorld[playerid] = newWorld;
-		if(oldWorld != INVALID_VIRTUAL_WORLD_ID) { //Don't call when the player is initializing
-			CallLocalFunction("OnPlayerVirtualWorldChange", "iii", playerid, newWorld, oldWorld);
+	#if !defined FILTERSCRIPT
+		//ON PLAYER VIRTUAL WORLD CHANGE
+		new newWorld = GetPlayerVirtualWorld(playerid);
+		new oldWorld = MainPlayer_ChangeWorld[playerid];
+		if(newWorld != oldWorld) {
+			MainPlayer_ChangeWorld[playerid] = newWorld;
+			if(oldWorld != INVALID_VIRTUAL_WORLD_ID) { //Don't call when the player is initializing
+				CallRemoteFunction("OnPlayerVirtualWorldChange", "iii", playerid, newWorld, oldWorld);
+			}
 		}
-	}
 
+		//PAUSE
+		// MainPlayer_PauseTickCount[playerid] = GetTickCount();
+	#endif
 
 	new ret = 1;
 	#if defined MainPlayer_OnPlayerUpdate
@@ -342,3 +491,27 @@ stock MainPlayer_SetPlayerPos(playerid, Float:x, Float:y, Float:z, bool:preload 
 	#define _ALS_SetPlayerPos
 #endif
 #define SetPlayerPos MainPlayer_SetPlayerPos
+
+//========================================TIMERS========================================
+// #if !defined FILTERSCRIPT
+// 	//PAUSE
+// 	forward MainPlayer_CheckPlayersPaused();
+// 	public MainPlayer_CheckPlayersPaused() {
+// 		for(new playerid = 0, highestPlayerid = GetPlayerPoolSize(); playerid <= highestPlayerid; playerid++) {
+// 			new playerState = GetPlayerState(playerid);
+// 			if(IsPlayerConnected(playerid) && !IsPlayerNPC(playerid) && playerState != PLAYER_STATE_WASTED && playerState != PLAYER_STATE_NONE) { //OnPlayerUpdate isn't called when the player is initializing, dead or in class selection
+// 				new bool:playerInGame = true;
+// 				if(GetTickCount() - MainPlayer_PauseTickCount[playerid] > 2000) { //2 second interval
+// 					playerInGame = false;
+// 				}
+// 				if(!playerInGame && !MainPlayer_Paused[playerid]) {
+// 					MainPlayer_Paused[playerid] = true;
+// 					CallRemoteFunction("OnPlayerPause", "i", playerid); //ON PLAYER PAUSE
+// 				} else if(playerInGame && MainPlayer_Paused[playerid]) {
+// 					MainPlayer_Paused[playerid] = false;
+// 					CallRemoteFunction("OnPlayerUnpause", "i", playerid); //ON PLAYER UNPAUSE
+// 				}
+// 			}
+// 		}
+// 	}
+// #endif
