@@ -1303,6 +1303,5 @@ stock MainVehicle_DestroyVehicle(vehicleid) {
 				}
 			}
 		}
-		return 1;
 	}
 #endif

@@ -201,7 +201,6 @@ forward MainAudioStream_Duration(playerid);
 public MainAudioStream_Duration(playerid) {
 	//DURATION
 	StopAudioStreamForPlayer(playerid);
-	return 1;
 }
 
 forward MainAudioStream_RadioFix(playerid);
@@ -210,5 +209,4 @@ public MainAudioStream_RadioFix(playerid) {
 	PlayerPlaySound(playerid, 1069, 0.0, 0.0, 0.0);
 	KillTimer(MainAudioStream_RadioFixTimer[playerid]);
 	MainAudioStream_RadioFixTimer[playerid] = INVALID_TIMER_ID;
-	return 1;
 }
