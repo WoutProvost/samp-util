@@ -35,6 +35,24 @@ static const MainWeapon_WeaponNames[][] = {
 	"Night Vision Goggles", "Infrared/Thermal Vision Goggles", "Parachute" //Slot 11
 };
 
+//IS VALID WEAPON
+/**
+ * -DESCRIPTION:
+ * 		-Get whether a weapon ID is valid.
+ * -PARAMETERS:
+ * 		-weaponid: The ID of the weapon to get whether it is valid.
+ * -RETURN VALUES:
+ * 		-true: The function executed successfully. The weapon ID is valid.
+ * 		-false: The function executed successfully. The weapon ID is not valid.
+ */
+//native bool:IsValidWeapon(weaponid); //Fake native
+stock bool:IsValidWeapon(weaponid) {
+	if((weaponid >= 0 && weaponid <= 18) || (weaponid >= 22 && weaponid <= 46)) {
+		return true;
+	}
+	return false;
+}
+
 //MODELS
 /**
  * -DESCRIPTION:

@@ -233,6 +233,7 @@ forward OnPlayerUnpause(playerid);
 #define INVALID_WEAPON_ID				-1
 #define MAX_WEAPON_NAME					31
 
+bool:IsValidWeapon(weaponid);
 GetWeaponModel(weaponid);
 Float:GetWeaponVehicleDamage(weaponid);
 bool:IsMeleeWeapon(weaponid);
