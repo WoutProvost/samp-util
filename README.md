@@ -105,6 +105,7 @@ GetMonthShortName(month, name[], len);
 #define MAX_TEXT_DRAW_TEXT				1024
 #define MAX_TEXT_DRAWS_SHOWN				MAX_TEXT_DRAWS+MAX_PLAYER_TEXT_DRAWS
 #define MAX_TEXT_DRAW_SPRITES_SHOWN			100
+#define PlayerTextDrawCreate				CreatePlayerTextDraw
 ```
 ### Dialog.inc
 ```pawn
