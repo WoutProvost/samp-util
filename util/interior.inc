@@ -3,21 +3,21 @@
 #endif
 #define _maininterior_included
 
-//INTERIOR AMOUNT LIMIT
+// INTERIOR AMOUNT LIMIT
 /**
  * -DESCRIPTION:
  * 		-Defines the interior amount limit.
  */
 #define MAX_INTERIORS						256
 
-//INVALID INTERIOR
+// INVALID INTERIOR
 /**
  * -DESCRIPTION:
  * 		-Defines an invalid interior ID.
  */
 #define INVALID_INTERIOR_ID					-1
 
-//DEFAULT INTERIOR
+// DEFAULT INTERIOR
 /**
  * -DESCRIPTION:
  * 		-Defines the default interior used by SA-MP.

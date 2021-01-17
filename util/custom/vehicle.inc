@@ -3,7 +3,7 @@
 #endif
 #define _customvehicle_included
 
-//MOTHERSHIP PAINTJOB
+// MOTHERSHIP PAINTJOB
 /**
  * -DESCRIPTION:
  * 		-Defines the paintjob used for the 'Mothership' vehicle.

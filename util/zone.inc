@@ -3,14 +3,14 @@
 #endif
 #define _mainzone_included
 
-//ZONE AMOUNT LIMIT
+// ZONE AMOUNT LIMIT
 /**
  * -DESCRIPTION:
  * 		-Defines the zone amount limit.
  */
 #define MAX_ZONES							366
 
-//NAMES
+// NAMES
 /**
  * -DESCRIPTION:
  * 		-Zone names and their coordinates.
@@ -24,7 +24,7 @@ enum MAINZONE_E_ZONE {
 	Float:MAINZONE_ZONE_COORDS[6]
 }
 static const MainZone_ZoneNames[MAX_ZONES][MAINZONE_E_ZONE] = {
-	//NAME							AREA (x_min, y_min, z_min, x_max, y_max, z_max)
+	// NAME							// AREA (x_min, y_min, z_min, x_max, y_max, z_max)
 	{"The Big Ear",					{-410.0, 1403.3, -3.0, -137.9, 1681.2, 200.0}},
 	{"Aldea Malvada",				{-1372.1, 2498.5, 0.0, -1277.5, 2615.3, 200.0}},
 	{"Angel Pine",					{-2324.9, -2584.2, -6.1, -1964.2, -2212.1, 200.0}},
@@ -381,7 +381,7 @@ static const MainZone_ZoneNames[MAX_ZONES][MAINZONE_E_ZONE] = {
 	{"Willowfield",					{2324.0, -2059.2, -89.0, 2541.7, -1852.8, 110.9}},
 	{"Willowfield",					{2541.7, -2059.2, -89.0, 2703.5, -1941.4, 110.9}},
 	{"Yellow Bell Station",			{1377.4, 2600.4, -21.9, 1492.4, 2687.3, 78.0}},
-	//Main zones (must be after more specific zones, so that they are only picked when more specific zones don't give a match)
+	// Main zones (must be after more specific zones, so that they are only picked when more specific zones don't give a match)
 	{"Los Santos",					{44.6, -2892.9, -242.9, 2997.0, -768.0, 900.0}},
 	{"Las Venturas",				{869.4, 596.3, -242.9, 2997.0, 2993.8, 900.0}},
 	{"Bone County",					{-480.5, 596.3, -242.9, 869.4, 2993.8, 900.0}},
@@ -391,11 +391,11 @@ static const MainZone_ZoneNames[MAX_ZONES][MAINZONE_E_ZONE] = {
 	{"Red County",					{-1213.9, -768.0, -242.9, 2997.0, 596.3, 900.0}},
 	{"Flint County",				{-1213.9, -2892.9, -242.9, 44.6, -768.0, 900.0}},
 	{"Whetstone",					{-2997.4, -2892.9, -242.9, -1213.9, -1115.5, 900.0}},
-	//Catch-all zone (must be last, so that it is only picked when nothing else gives a match)
+	// Catch-all zone (must be last, so that it is only picked when nothing else gives a match)
 	{"San Andreas",					{FLOAT_NEG_INFINITY, FLOAT_NEG_INFINITY, FLOAT_NEG_INFINITY, FLOAT_INFINITY, FLOAT_INFINITY, FLOAT_INFINITY}}
 };
 
-//GET ZONE ID
+// GET ZONE ID
 /**
  * -DESCRIPTION:
  * 		-Get the ID of the most specific zone a set of coordinates is in.
@@ -406,7 +406,7 @@ static const MainZone_ZoneNames[MAX_ZONES][MAINZONE_E_ZONE] = {
  * -RETURN VALUES:
  * 		-valid zoneid: The function executed successfully.
  */
-//native GetZoneID(Float:x, Float:y, Float:z); //Fake native
+// native GetZoneID(Float:x, Float:y, Float:z); // Fake native
 stock GetZoneID(Float:x, Float:y, Float:z) {
 	for(new zoneid = 0; zoneid < MAX_ZONES; zoneid++) {
 		if(x >= MainZone_ZoneNames[zoneid][MAINZONE_ZONE_COORDS][0] && x <= MainZone_ZoneNames[zoneid][MAINZONE_ZONE_COORDS][3]
@@ -415,10 +415,12 @@ stock GetZoneID(Float:x, Float:y, Float:z) {
 			return zoneid;
 		}
 	}
-	return MAX_ZONES - 1; //The compiler complains that we need to return a value, so we return the catch-all zone even though that this code will never be reached
+
+	// The compiler complains that we need to return a value, so we return the catch-all zone even though that this code will never be reached
+	return MAX_ZONES - 1;
 }
 
-//GET ZONE NAME
+// GET ZONE NAME
 /**
  * -DESCRIPTION:
  * 		-Get the name of a zone.
@@ -432,7 +434,7 @@ stock GetZoneID(Float:x, Float:y, Float:z) {
  * -NOTES:
  * 		-Works like GetPlayerName so that the name is stored in the given string parameter.
  */
-//native GetZoneName(zoneid, name[], len); //Fake native
+// native GetZoneName(zoneid, name[], len); // Fake native
 stock GetZoneName(zoneid, name[], len) {
 	if(zoneid >= 0 && zoneid < MAX_ZONES) {
 		return strmid(name, MainZone_ZoneNames[zoneid][MAINZONE_ZONE_NAME], 0, len, len);
@@ -440,7 +442,7 @@ stock GetZoneName(zoneid, name[], len) {
 	return 0;
 }
 
-//GET ZONE COORDINATES
+// GET ZONE COORDINATES
 /**
  * -DESCRIPTION:
  * 		-Get the coordinates of a zone.
@@ -456,7 +458,7 @@ stock GetZoneName(zoneid, name[], len) {
  * 		-1: The function executed successfully.
  * 		-0: The function failed to execute. An invalid zoneid was given.
  */
-//native GetZoneCoordinates(zoneid, &Float:x_min, &Float:y_min, &Float:z_min, &Float:x_max, &Float:y_max, &Float:z_max); //Fake native
+// native GetZoneCoordinates(zoneid, &Float:x_min, &Float:y_min, &Float:z_min, &Float:x_max, &Float:y_max, &Float:z_max); // Fake native
 stock GetZoneCoordinates(zoneid, &Float:x_min, &Float:y_min, &Float:z_min, &Float:x_max, &Float:y_max, &Float:z_max) {
 	if(zoneid >= 0 && zoneid < MAX_ZONES) {
 		x_min = MainZone_ZoneNames[zoneid][MAINZONE_ZONE_COORDS][0];

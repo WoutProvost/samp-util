@@ -3,21 +3,21 @@
 #endif
 #define _mainvirtualworld_included
 
-//VIRTUAL WORLD AMOUNT LIMIT
+// VIRTUAL WORLD AMOUNT LIMIT
 /**
  * -DESCRIPTION:
  * 		-Defines the virtual world amount limit (2147483647).
  */
 #define MAX_VIRTUAL_WORLDS					cellmax
 
-//INVALID VIRTUAL WORLD
+// INVALID VIRTUAL WORLD
 /**
  * -DESCRIPTION:
  * 		-Defines an invalid virtual world ID.
  */
 #define INVALID_VIRTUAL_WORLD_ID			-1
 
-//DEFAULT VIRTUAL WORLD
+// DEFAULT VIRTUAL WORLD
 /**
  * -DESCRIPTION:
  * 		-Defines the default virtual world used by SA-MP.

@@ -5,7 +5,7 @@
 
 #include <a_samp>
 
-//MAIN: contains default logic and constants
+// MAIN: Contains default logic and constants
 #include "util/color.inc"
 #include "util/math.inc"
 #include "util/string.inc"
@@ -25,6 +25,6 @@
 #include "util/audiostream.inc"
 #include "util/zone.inc"
 
-//CUSTOM: contains custom logic and constants
+// CUSTOM: Contains custom logic and constants
 #include "util/custom/interior.inc"
 #include "util/custom/vehicle.inc"

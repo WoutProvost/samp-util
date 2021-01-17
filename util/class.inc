@@ -3,28 +3,28 @@
 #endif
 #define _mainclass_included
 
-//INVALID CLASS
+// INVALID CLASS
 /**
  * -DESCRIPTION:
  * 		-Defines an invalid class ID.
  */
 #define INVALID_CLASS_ID					-1
 
-//CLASS AMOUNT LIMIT
+// CLASS AMOUNT LIMIT
 /**
  * -DESCRIPTION:
  * 		-Defines the class amount limit.
  */
 #define MAX_CLASSES							320
 
-//PLAYER CLASS
+// PLAYER CLASS
 /**
  * -DESCRIPTION:
  * 		-Store the player class the player selects.
  */
 static MainClass_PlayerClass[MAX_PLAYERS] = {INVALID_CLASS_ID, ...};
 
-//SPAWN WORLDS
+// SPAWN WORLDS
 /**
  * -DESCRIPTION:
  * 		-Makes sure that the player respawns in the world belonging to the class.
@@ -34,7 +34,7 @@ static MainClass_PlayerClass[MAX_PLAYERS] = {INVALID_CLASS_ID, ...};
  */
 static MainClass_SpawnWorld[MAX_CLASSES] = {INVALID_VIRTUAL_WORLD_ID, ...};
 
-//SPAWN INTERIORS
+// SPAWN INTERIORS
 /**
  * -DESCRIPTION:
  * 		-Makes sure that the player respawns in the interior belonging to the class.
@@ -44,38 +44,38 @@ static MainClass_SpawnWorld[MAX_CLASSES] = {INVALID_VIRTUAL_WORLD_ID, ...};
  */
 static MainClass_SpawnInterior[MAX_CLASSES] = {INVALID_INTERIOR_ID, ...};
 
-//========================================INTERNAL FUNCTIONS========================================
+// ========================================INTERNAL FUNCTIONS========================================
 static MainClass_InitScript() {
-	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) { //Using MAX_PLAYERS instead of GetPlayerPoolSize because we need to initialize the variables of all possible player IDs
-		//PLAYER CLASS
+	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) {
+		// PLAYER CLASS
 		MainClass_PlayerClass[playerid] = INVALID_CLASS_ID;
 	}
 
 	for(new classid = 0; classid < MAX_CLASSES; classid++) {
-		//SPAWN WORLDS
+		// SPAWN WORLDS
 		MainClass_SpawnWorld[classid] = INVALID_VIRTUAL_WORLD_ID;
 
-		//SPAWN INTERIORS
+		// SPAWN INTERIORS
 		MainClass_SpawnInterior[classid] = INVALID_INTERIOR_ID;
 	}
 }
 
 static MainClass_ExitScript() {
-	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) { //Using MAX_PLAYERS instead of GetPlayerPoolSize because we need to reset the variables of all possible player IDs
-		//PLAYER CLASS
+	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) {
+		// PLAYER CLASS
 		MainClass_PlayerClass[playerid] = INVALID_CLASS_ID;
 	}
 
 	for(new classid = 0; classid < MAX_CLASSES; classid++) {
-		//SPAWN WORLDS
+		// SPAWN WORLDS
 		MainClass_SpawnWorld[classid] = INVALID_VIRTUAL_WORLD_ID;
 
-		//SPAWN INTERIORS
+		// SPAWN INTERIORS
 		MainClass_SpawnInterior[classid] = INVALID_INTERIOR_ID;
 	}
 }
 
-//========================================HOOKED CALLBACKS========================================
+// ========================================HOOKED CALLBACKS========================================
 #if defined FILTERSCRIPT
 	public OnFilterScriptInit()
 	{
@@ -160,7 +160,7 @@ static MainClass_ExitScript() {
 
 public OnPlayerDisconnect(playerid, reason)
 {
-	//PLAYER CLASS
+	// PLAYER CLASS
 	MainClass_PlayerClass[playerid] = INVALID_CLASS_ID;
 
 	new ret = 1;
@@ -181,12 +181,13 @@ public OnPlayerDisconnect(playerid, reason)
 
 public OnPlayerRequestClass(playerid, classid)
 {
-	//SPAWN WORLDS //SPAWN INTERIORS
-	if(MainClass_SpawnWorld[classid] != INVALID_VIRTUAL_WORLD_ID && MainClass_SpawnInterior[classid] != INVALID_INTERIOR_ID) { //Only handle classes created in this FS/GM
-		//PLAYER CLASS
+	// SPAWN WORLDS // SPAWN INTERIORS
+	// Only handle classes created in this FS/GM
+	if(MainClass_SpawnWorld[classid] != INVALID_VIRTUAL_WORLD_ID && MainClass_SpawnInterior[classid] != INVALID_INTERIOR_ID) {
+		// PLAYER CLASS
 		MainClass_PlayerClass[playerid] = classid;
 	} else {
-		//PLAYER CLASS
+		// PLAYER CLASS
 		MainClass_PlayerClass[playerid] = INVALID_CLASS_ID;
 	}
 
@@ -208,12 +209,13 @@ public OnPlayerRequestClass(playerid, classid)
 
 public OnPlayerSpawn(playerid)
 {
-	 //PLAYER CLASS
-	if(MainClass_PlayerClass[playerid] != INVALID_CLASS_ID) { //Only handle classes created in this FS/GM
-		//SPAWN WORLDS
+	// PLAYER CLASS
+	// Only handle classes created in this FS/GM
+	if(MainClass_PlayerClass[playerid] != INVALID_CLASS_ID) {
+		// SPAWN WORLDS
 		SetPlayerVirtualWorld(playerid, MainClass_SpawnWorld[MainClass_PlayerClass[playerid]]);
 
-		//SPAWN INTERIORS
+		// SPAWN INTERIORS
 		SetPlayerInterior(playerid, MainClass_SpawnInterior[MainClass_PlayerClass[playerid]]);
 	}
 
@@ -233,8 +235,8 @@ public OnPlayerSpawn(playerid)
 	forward MainClass_OnPlayerSpawn(playerid);
 #endif
 
-//========================================HOOKED FUNCTIONS========================================
-//ADD PLAYER CLASS EX
+// ========================================HOOKED FUNCTIONS========================================
+// ADD PLAYER CLASS EX
 /**
  * -DESCRIPTION:
  * 		-Add a class to class selection with team, spawn world and spawn interior.
@@ -264,15 +266,15 @@ public OnPlayerSpawn(playerid)
  * -RETURN VALUES:
  * 		-valid classid: The function executed successfully.
  */
-//native AddPlayerClassEx(teamid, modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapon3_ammo = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL); //Fake native
+// native AddPlayerClassEx(teamid, modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapon3_ammo = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL); // Fake native
 stock MainClass_AddPlayerClassEx(teamid, modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle,
 weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapon3_ammo = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL) {
 	new classid = AddPlayerClassEx(teamid, modelid, spawn_x, spawn_y, spawn_z, z_angle, weapon1, weapon1_ammo, weapon2, weapon2_ammo, weapon3, weapon3_ammo);
 
-	//SPAWN WORLDS
+	// SPAWN WORLDS
 	MainClass_SpawnWorld[classid] = worldid;
 
-	//SPAWN INTERIOR
+	// SPAWN INTERIOR
 	MainClass_SpawnInterior[classid] = interiorid;
 
 	return classid;
@@ -284,7 +286,7 @@ weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapo
 #endif
 #define AddPlayerClassEx MainClass_AddPlayerClassEx
 
-//ADD PLAYER CLASS
+// ADD PLAYER CLASS
 /**
  * -DESCRIPTION:
  * 		-Add a class to class selection with team, spawn world and spawn interior.
@@ -315,7 +317,7 @@ weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapo
  * -RETURN VALUES:
  * 		-valid classid: The function executed successfully.
  */
-//native AddPlayerClass(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapon3_ammo = 0, teamid = NO_TEAM, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL); //Fake native
+// native AddPlayerClass(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapon3_ammo = 0, teamid = NO_TEAM, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL); // Fake native
 stock MainClass_AddPlayerClass(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle,
 weapon1 = 0, weapon1_ammo = 0, weapon2 = 0, weapon2_ammo = 0, weapon3 = 0, weapon3_ammo = 0, teamid = NO_TEAM, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL) {
 	return AddPlayerClassEx(teamid, modelid, spawn_x, spawn_y, spawn_z, z_angle, weapon1, weapon1_ammo, weapon2, weapon2_ammo, weapon3, weapon3_ammo, worldid, interiorid);

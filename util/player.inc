@@ -3,7 +3,7 @@
 #endif
 #define _mainplayer_included
 
-//CLEAR CHAT
+// CLEAR CHAT
 /**
  * -DESCRIPTION:
  * 		-Clears a player's chat.
@@ -13,7 +13,7 @@
  * 		-1: The function executed successfully.
  * 		-0: The function failed to execute. An invalid playerid was given.
  */
-//native ClearChat(playerid); //Fake native
+// native ClearChat(playerid); // Fake native
 stock ClearChat(playerid) {
 	if(IsPlayerConnected(playerid)) {
 		for(new line = 0; line < 100; line++) {
@@ -24,7 +24,7 @@ stock ClearChat(playerid) {
 	return 0;
 }
 
-//CLEAR KILLFEED
+// CLEAR KILLFEED
 /**
  * -DESCRIPTION:
  * 		-Clears a player's killfeed.
@@ -34,7 +34,7 @@ stock ClearChat(playerid) {
  * 		-1: The function executed successfully.
  * 		-0: The function failed to execute. An invalid playerid was given.
  */
-//native ClearKillFeed(playerid); //Fake native
+// native ClearKillFeed(playerid); // Fake native
 stock ClearKillFeed(playerid) {
 	if(IsPlayerConnected(playerid)) {
 		for(new death = 0; death < 5; death++) {
@@ -45,7 +45,7 @@ stock ClearKillFeed(playerid) {
 	return 0;
 }
 
-//CLEAR GAMETEXTS
+// CLEAR GAMETEXTS
 /**
  * -DESCRIPTION:
  * 		-Clears all gamtexts on a player's screen.
@@ -55,7 +55,7 @@ stock ClearKillFeed(playerid) {
  * 		-1: The function executed successfully.
  * 		-0: The function failed to execute. An invalid playerid was given.
  */
-//native ClearGameTexts(playerid); //Fake native
+// native ClearGameTexts(playerid); // Fake native
 stock ClearGameTexts(playerid) {
 	if(IsPlayerConnected(playerid)) {
 		GameTextForPlayer(playerid, " ", 100, 0);
@@ -70,7 +70,7 @@ stock ClearGameTexts(playerid) {
 	return 0;
 }
 
-//RETURN PLAYER NAME AND ID
+// RETURN PLAYER NAME AND ID
 /**
  * -DESCRIPTION:
  * 		-Returns a string with a player's name and ID.
@@ -79,7 +79,7 @@ stock ClearGameTexts(playerid) {
  * -RETURN VALUES:
  * 		-string with player name and ID: The function executed successfully.
  */
-//native ReturnPlayerNameAndID(playerid); //Fake native
+// native ReturnPlayerNameAndID(playerid); // Fake native
 stock ReturnPlayerNameAndID(playerid) {
 	new name[MAX_PLAYER_NAME + 1], output[MAX_PLAYER_NAME + 5 + 3 + 1 + 1];
 	GetPlayerName(playerid, name, sizeof(name));
@@ -87,7 +87,7 @@ stock ReturnPlayerNameAndID(playerid) {
 	return output;
 }
 
-//PLAY SOUND FOR PLAYERS IN RANGE
+// PLAY SOUND FOR PLAYERS IN RANGE
 /**
  * -DESCRIPTION:
  * 		-Plays a sound for all players within a given range.
@@ -105,7 +105,7 @@ stock ReturnPlayerNameAndID(playerid) {
  * -RETURN VALUES:
  * 		-1: The function executed successfully.
  */
-//native PlaySoundForPlayersInRange(soundid, Float:x, Float:y, Float:z, Float:range, interiorid = INTERIOR_NORMAL, worldid = VIRTUAL_WORLD_NORMAL); //Fake native
+// native PlaySoundForPlayersInRange(soundid, Float:x, Float:y, Float:z, Float:range, interiorid = INTERIOR_NORMAL, worldid = VIRTUAL_WORLD_NORMAL); // Fake native
 stock PlaySoundForPlayersInRange(soundid, Float:x, Float:y, Float:z, Float:range = 50.0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL) {
 	for(new playerid = 0, highestPlayerid = GetPlayerPoolSize(); playerid <= highestPlayerid; playerid++) {
 		if(IsPlayerConnected(playerid) && GetPlayerInterior(playerid) == interiorid && worldid == GetPlayerVirtualWorld(playerid) && IsPlayerInRangeOfPoint(playerid, range, x, y, z)) {
@@ -115,7 +115,7 @@ stock PlaySoundForPlayersInRange(soundid, Float:x, Float:y, Float:z, Float:range
 	return 1;
 }
 
-//IS PLAYER IN NORMAL WORLD
+// IS PLAYER IN NORMAL WORLD
 /**
  * -DESCRIPTION:
  * 		-Get whether a player is in the default world.
@@ -129,7 +129,7 @@ stock PlaySoundForPlayersInRange(soundid, Float:x, Float:y, Float:z, Float:range
  * -NOTES:
  * 		-Uses the 'Normal' naming scheme instead of the 'Default' naming scheme, to be in line with the naming scheme used by SA-MP for e.g. fighting styles.
  */
-//native bool:IsPlayerInNormalWorld(playerid); //Fake native
+// native bool:IsPlayerInNormalWorld(playerid); // Fake native
 stock bool:IsPlayerInNormalWorld(playerid) {
 	if(IsPlayerConnected(playerid)) {
 		if(GetPlayerVirtualWorld(playerid) == VIRTUAL_WORLD_NORMAL && GetPlayerInterior(playerid) == INTERIOR_NORMAL) {
@@ -139,7 +139,7 @@ stock bool:IsPlayerInNormalWorld(playerid) {
 	return false;
 }
 
-//ON PLAYER VIRTUAL WORLD CHANGE
+// ON PLAYER VIRTUAL WORLD CHANGE
 /**
  * -DESCRIPTION:
  * 		-Gets called when a player changes virtual worlds.
@@ -159,7 +159,7 @@ forward OnPlayerVirtualWorldChange(playerid, newvirtualworldid, oldvirtualworldi
 	static MainPlayer_ChangeWorld[MAX_PLAYERS] = {INVALID_VIRTUAL_WORLD_ID, ...};
 #endif
 
-//PAUSE
+// PAUSE
 /**
  * -DESCRIPTION:
  * 		-Store whether a player is paused and the last tick count when that player was still unpaused.
@@ -171,7 +171,7 @@ forward OnPlayerVirtualWorldChange(playerid, newvirtualworldid, oldvirtualworldi
 // 	static MainPlayer_PauseTimer = INVALID_TIMER_ID;
 // #endif
 
-//IS PLAYER PAUSED
+// IS PLAYER PAUSED
 /**
  * -DESCRIPTION:
  * 		-Get whether a player is paused.
@@ -183,19 +183,20 @@ forward OnPlayerVirtualWorldChange(playerid, newvirtualworldid, oldvirtualworldi
  * 			-The function executed successfully. The player is not paused.
  * 			-The function failed to execute. An invalid playerid was given.
  */
-//native bool:IsPlayerPaused(playerid); //Fake native
+// native bool:IsPlayerPaused(playerid); // Fake native
 // #if !defined FILTERSCRIPT
 // 	#if !defined IsPlayerPaused
 // 		stock bool:IsPlayerPaused(playerid) {
 // 			if(IsPlayerConnected(playerid)) {
-// 				return MainPlayer_Paused[playerid]; //PAUSE
+// 				// PAUSE
+// 				return MainPlayer_Paused[playerid];
 // 			}
 // 			return false;
 // 		}
 // 	#endif
 // #endif
 
-//GET PLAYER PAUSED TIME
+// GET PLAYER PAUSED TIME
 /**
  * -DESCRIPTION:
  * 		-Get the time a player has been paused for in milliseconds.
@@ -207,11 +208,12 @@ forward OnPlayerVirtualWorldChange(playerid, newvirtualworldid, oldvirtualworldi
  * 			-The function executed successfully. The player is not paused.
  * 			-The function failed to execute. An invalid playerid was given.
  */
-//native GetPlayerPausedTime(playerid); //Fake native
+// native GetPlayerPausedTime(playerid); // Fake native
 // #if !defined FILTERSCRIPT
 // 	#if !defined GetPlayerPausedTime
 // 		stock GetPlayerPausedTime(playerid) {
-// 			if(IsPlayerConnected(playerid) && MainPlayer_Paused[playerid]) {  //PAUSE
+// 			// PAUSE
+// 			if(IsPlayerConnected(playerid) && MainPlayer_Paused[playerid]) {
 // 				return GetTickCount() - MainPlayer_PauseTickCount[playerid];
 // 			}
 // 			return 0;
@@ -219,7 +221,7 @@ forward OnPlayerVirtualWorldChange(playerid, newvirtualworldid, oldvirtualworldi
 // 	#endif
 // #endif
 
-//ON PLAYER PAUSE
+// ON PLAYER PAUSE
 /**
  * -DESCRIPTION:
  * 		-Gets called when a player pauses the game (opens the game menu or presses ALT-TAB).
@@ -235,7 +237,7 @@ forward OnPlayerVirtualWorldChange(playerid, newvirtualworldid, oldvirtualworldi
  */
 // forward OnPlayerPause(playerid);
 
-//ON PLAYER UNPAUSE
+// ON PLAYER UNPAUSE
 /**
  * -DESCRIPTION:
  * 		-Gets called when a player unpauzes the game (closes the game menu).
@@ -251,45 +253,45 @@ forward OnPlayerVirtualWorldChange(playerid, newvirtualworldid, oldvirtualworldi
  */
 // forward OnPlayerUnpause(playerid);
 
-//========================================INTERNAL FUNCTIONS========================================
+// ========================================INTERNAL FUNCTIONS========================================
 static MainPlayer_InitScript() {
-	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) { //Using MAX_PLAYERS instead of GetPlayerPoolSize because we need to initialize the variables of all possible player IDs
+	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) {
 		#if !defined FILTERSCRIPT
-			//ON PLAYER VIRTUAL WORLD CHANGE
+			// ON PLAYER VIRTUAL WORLD CHANGE
 			MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
 
-			//PAUSE
+			// PAUSE
 			// MainPlayer_Paused[playerid] = false;
 			// MainPlayer_PauseTickCount[playerid] = GetTickCount();
 		#endif
 	}
-	
+
 	// #if !defined FILTERSCRIPT
-	// 	//PAUSE
+	// 	// PAUSE
 	// 	MainPlayer_PauseTimer = SetTimer("MainPlayer_CheckPlayersPaused", 1000, true);
 	// #endif
 }
 
 static MainPlayer_ExitScript() {
-	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) { //Using MAX_PLAYERS insteaf of GetPlayerPoolSize because we need to reset the variables of all possible player IDs
+	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) {
 		#if !defined FILTERSCRIPT
-			//ON PLAYER VIRTUAL WORLD CHANGE
+			// ON PLAYER VIRTUAL WORLD CHANGE
 			MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
 
-			//PAUSE
+			// PAUSE
 			// MainPlayer_Paused[playerid] = false;
 			// MainPlayer_PauseTickCount[playerid] = 0;
 		#endif
 	}
 
 	// #if !defined FILTERSCRIPT
-	// 	//PAUSE
+	// 	// PAUSE
 	// 	KillTimer(MainPlayer_PauseTimer);
 	// 	MainPlayer_PauseTimer = INVALID_TIMER_ID;
 	// #endif
 }
 
-//========================================HOOKED CALLBACKS========================================
+// ========================================HOOKED CALLBACKS========================================
 #if defined FILTERSCRIPT
 	public OnFilterScriptInit()
 	{
@@ -375,7 +377,7 @@ static MainPlayer_ExitScript() {
 // public OnPlayerConnect(playerid)
 // {
 // 	#if !defined FILTERSCRIPT
-// 		//PAUSE
+// 		// PAUSE
 // 		MainPlayer_Paused[playerid] = false;
 // 		MainPlayer_PauseTickCount[playerid] = GetTickCount();
 // 	#endif
@@ -399,10 +401,10 @@ static MainPlayer_ExitScript() {
 public OnPlayerDisconnect(playerid, reason)
 {
 	#if !defined FILTERSCRIPT
-		//ON PLAYER VIRTUAL WORLD CHANGE
+		// ON PLAYER VIRTUAL WORLD CHANGE
 		MainPlayer_ChangeWorld[playerid] = INVALID_VIRTUAL_WORLD_ID;
 
-		//PAUSE
+		// PAUSE
 		// MainPlayer_Paused[playerid] = false;
 		// MainPlayer_PauseTickCount[playerid] = 0;
 	#endif
@@ -426,17 +428,19 @@ public OnPlayerDisconnect(playerid, reason)
 public OnPlayerUpdate(playerid)
 {
 	#if !defined FILTERSCRIPT
-		//ON PLAYER VIRTUAL WORLD CHANGE
+		// ON PLAYER VIRTUAL WORLD CHANGE
 		new newWorld = GetPlayerVirtualWorld(playerid);
 		new oldWorld = MainPlayer_ChangeWorld[playerid];
 		if(newWorld != oldWorld) {
 			MainPlayer_ChangeWorld[playerid] = newWorld;
-			if(oldWorld != INVALID_VIRTUAL_WORLD_ID) { //Don't call when the player is initializing
+
+			// Don't call when the player is initializing
+			if(oldWorld != INVALID_VIRTUAL_WORLD_ID) {
 				CallRemoteFunction("OnPlayerVirtualWorldChange", "iii", playerid, newWorld, oldWorld);
 			}
 		}
 
-		//PAUSE
+		// PAUSE
 		// MainPlayer_PauseTickCount[playerid] = GetTickCount();
 	#endif
 
@@ -456,8 +460,8 @@ public OnPlayerUpdate(playerid)
 	forward MainPlayer_OnPlayerUpdate(playerid);
 #endif
 
-//========================================HOOKED FUNCTIONS========================================
-//SET PLAYER POSITION
+// ========================================HOOKED FUNCTIONS========================================
+// SET PLAYER POSITION
 /**
  * -DESCRIPTION:
  * 		-Set a player's position and preload streamed items.
@@ -474,7 +478,7 @@ public OnPlayerUpdate(playerid)
  * -NOTES:
  * 		-The streamer include must be loaded before this include in order for the preloading to work.
  */
-//native SetPlayerPos(playerid, Float:x, Float:y, Float:z, bool:preload = false); //Fake native
+// native SetPlayerPos(playerid, Float:x, Float:y, Float:z, bool:preload = false); // Fake native
 stock MainPlayer_SetPlayerPos(playerid, Float:x, Float:y, Float:z, bool:preload = false) {
 	#if defined _streamer_included
 		if(preload) {
@@ -492,24 +496,28 @@ stock MainPlayer_SetPlayerPos(playerid, Float:x, Float:y, Float:z, bool:preload 
 #endif
 #define SetPlayerPos MainPlayer_SetPlayerPos
 
-//========================================TIMERS========================================
+// ========================================TIMERS========================================
 // #if !defined FILTERSCRIPT
-// 	//PAUSE
+// 	// PAUSE
 // 	forward MainPlayer_CheckPlayersPaused();
 // 	public MainPlayer_CheckPlayersPaused() {
 // 		for(new playerid = 0, highestPlayerid = GetPlayerPoolSize(); playerid <= highestPlayerid; playerid++) {
 // 			new playerState = GetPlayerState(playerid);
-// 			if(IsPlayerConnected(playerid) && !IsPlayerNPC(playerid) && playerState != PLAYER_STATE_WASTED && playerState != PLAYER_STATE_NONE) { //OnPlayerUpdate isn't called when the player is initializing, dead or in class selection
+
+// 			// OnPlayerUpdate isn't called when the player is initializing, dead or in class selection
+// 			if(IsPlayerConnected(playerid) && !IsPlayerNPC(playerid) && playerState != PLAYER_STATE_WASTED && playerState != PLAYER_STATE_NONE) {
 // 				new bool:playerInGame = true;
-// 				if(GetTickCount() - MainPlayer_PauseTickCount[playerid] > 2000) { //2 second interval
+// 				if(GetTickCount() - MainPlayer_PauseTickCount[playerid] > 2000) { // 2 second interval
 // 					playerInGame = false;
 // 				}
 // 				if(!playerInGame && !MainPlayer_Paused[playerid]) {
 // 					MainPlayer_Paused[playerid] = true;
-// 					CallRemoteFunction("OnPlayerPause", "i", playerid); //ON PLAYER PAUSE
+// 					// ON PLAYER PAUSE
+// 					CallRemoteFunction("OnPlayerPause", "i", playerid);
 // 				} else if(playerInGame && MainPlayer_Paused[playerid]) {
 // 					MainPlayer_Paused[playerid] = false;
-// 					CallRemoteFunction("OnPlayerUnpause", "i", playerid); //ON PLAYER UNPAUSE
+// 					// ON PLAYER UNPAUSE
+// 					CallRemoteFunction("OnPlayerUnpause", "i", playerid);
 // 				}
 // 			}
 // 		}

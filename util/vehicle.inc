@@ -3,14 +3,14 @@
 #endif
 #define _mainvehicle_included
 
-//VEHICLE MODEL AMOUNT LIMIT
+// VEHICLE MODEL AMOUNT LIMIT
 /**
  * -DESCRIPTION:
  * 		-Defines the vehicle model amount limit.
  */
 #define MAX_VEHICLE_MODELS					212
 
-//IS VALID VEHICLE
+// IS VALID VEHICLE
 /**
  * -DESCRIPTION:
  * 		-Get whether a vehicle is created.
@@ -28,7 +28,7 @@
 	native bool:IsValidVehicle(vehicleid);
 #endif
 
-//GET VEHICLE INTERIOR
+// GET VEHICLE INTERIOR
 /**
  * -DESCRIPTION:
  * 		-Get a vehicle's interior.
@@ -39,16 +39,17 @@
  * 		-INVALID_INTERIOR_ID: The function failed to execute. An invalid vehicleid was given.
  */
 #if !defined GetVehicleInterior
-	//native GetVehicleInterior(vehicleid); //Fake native
+	// native GetVehicleInterior(vehicleid); // Fake native
 	stock GetVehicleInterior(vehicleid) {
 		if(IsValidVehicle(vehicleid)) {
-			return MainVehicle_ChangeInterior[vehicleid]; //ON VEHICLE INTERIOR CHANGE
+			// ON VEHICLE INTERIOR CHANGE
+			return MainVehicle_ChangeInterior[vehicleid];
 		}
 		return INVALID_INTERIOR_ID;
 	}
 #endif
 
-//IS VEHICLE IN NORMAL WORLD
+// IS VEHICLE IN NORMAL WORLD
 /**
  * -DESCRIPTION:
  * 		-Get whether a vehicle is in the default world.
@@ -62,7 +63,7 @@
  * -NOTES:
  * 		-Uses the 'Normal' naming scheme instead of the 'Default' naming scheme, to be in line with the naming scheme used by SA-MP for e.g. fighting styles.
  */
-//native bool:IsVehicleInNormalWorld(vehicleid); //Fake native
+// native bool:IsVehicleInNormalWorld(vehicleid); // Fake native
 stock bool:IsVehicleInNormalWorld(vehicleid) {
 	if(IsValidVehicle(vehicleid)) {
 		if(GetVehicleVirtualWorld(vehicleid) == VIRTUAL_WORLD_NORMAL && GetVehicleInterior(vehicleid) == INTERIOR_NORMAL) {
@@ -72,13 +73,13 @@ stock bool:IsVehicleInNormalWorld(vehicleid) {
 	return false;
 }
 
-//TRAINS
+// TRAINS
 /**
  * -DESCRIPTION:
  * 		-Makes sure that trains are always created with AddStaticVehicleEx and not wrongly with CreateVehicle. Trains can only be added with AddStaticVehicle and AddStaticVehicleEx.
  */
 
-//SPAWN WORLDS
+// SPAWN WORLDS
 /**
  * -DESCRIPTION:
  * 		-Makes sure that the vehicle respawns in the world it was first created.
@@ -88,7 +89,7 @@ stock bool:IsVehicleInNormalWorld(vehicleid) {
  */
 static MainVehicle_SpawnWorld[MAX_VEHICLES] = {INVALID_VIRTUAL_WORLD_ID, ...};
 
-//SPAWN INTERIORS
+// SPAWN INTERIORS
 /**
  * -DESCRIPTION:
  * 		-Makes sure that the vehicle respawns in the interior it was first created.
@@ -96,11 +97,11 @@ static MainVehicle_SpawnWorld[MAX_VEHICLES] = {INVALID_VIRTUAL_WORLD_ID, ...};
  * 		-Otherwise, when a vehicle 'dies' in a certain interior, it will respawn in that interior and not in the interior it was first created.
  * 		-Defaults to INTERIOR_NORMAL.
  */
-//native SetVehicleInterior(vehicleid); //Fake native
-#define SetVehicleInterior					LinkVehicleToInterior //Alias
+// native SetVehicleInterior(vehicleid); // Fake native
+#define SetVehicleInterior					LinkVehicleToInterior // Alias
 static MainVehicle_SpawnInterior[MAX_VEHICLES] = {INVALID_INTERIOR_ID, ...};
 
-//SPAWN PAINTJOBS
+// SPAWN PAINTJOBS
 /**
  * -DESCRIPTION:
  * 		-Makes sure that the vehicle respawns with the paintjob it was given when it was first created.
@@ -109,11 +110,11 @@ static MainVehicle_SpawnInterior[MAX_VEHICLES] = {INVALID_INTERIOR_ID, ...};
  */
 #define INVALID_PAINTJOB_ID					-1
 #define PAINTJOB_NONE						3
-//native SetVehiclePaintjob(vehicleid, paintjobid); //Fake native
-#define SetVehiclePaintjob					ChangeVehiclePaintjob //Alias
+// native SetVehiclePaintjob(vehicleid, paintjobid); // Fake native
+#define SetVehiclePaintjob					ChangeVehiclePaintjob // Alias
 static MainVehicle_SpawnPaintjob[MAX_VEHICLES] = {INVALID_PAINTJOB_ID, ...};
 
-//SYNCED RANDOM SP COLOURS
+// SYNCED RANDOM SP COLOURS
 /**
  * -DESCRIPTION:
  * 		-Syncs random vehicle colours between players.
@@ -135,23 +136,23 @@ static MainVehicle_SpawnPaintjob[MAX_VEHICLES] = {INVALID_PAINTJOB_ID, ...};
  * -CREDITS:
  * 		-MP2: http://forum.sa-mp.com/showthread.php?t=339088
  */
-#define INVALID_VEHICLE_COLOR_ID			-2 //-1 is used for synced random SP colours
-//native ChangeVehicleColors(vehicleid, color1, color2); //Fake native
-#define ChangeVehicleColors					ChangeVehicleColor //Alias
-//native ChangeVehicleColour(vehicleid, color1, color2); //Fake native
-#define ChangeVehicleColour					ChangeVehicleColor //Alias
-//native ChangeVehicleColours(vehicleid, color1, color2); //Fake native
-#define ChangeVehicleColours				ChangeVehicleColor //Alias
-//native SetVehicleColor(vehicleid, color1, color2); //Fake native
-#define SetVehicleColor						ChangeVehicleColor //Alias
-//native SetVehicleColors(vehicleid, color1, color2); //Fake native
-#define SetVehicleColors					ChangeVehicleColor //Alias
-//native SetVehicleColour(vehicleid, color1, color2); //Fake native
-#define SetVehicleColour					ChangeVehicleColor //Alias
-//native SetVehicleColours(vehicleid, color1, color2); //Fake native
-#define SetVehicleColours					ChangeVehicleColor //Alias
+#define INVALID_VEHICLE_COLOR_ID			-2 // -1 is used for synced random SP colours
+// native ChangeVehicleColors(vehicleid, color1, color2); // Fake native
+#define ChangeVehicleColors					ChangeVehicleColor // Alias
+// native ChangeVehicleColour(vehicleid, color1, color2); // Fake native
+#define ChangeVehicleColour					ChangeVehicleColor // Alias
+// native ChangeVehicleColours(vehicleid, color1, color2); // Fake native
+#define ChangeVehicleColours				ChangeVehicleColor // Alias
+// native SetVehicleColor(vehicleid, color1, color2); // Fake native
+#define SetVehicleColor						ChangeVehicleColor // Alias
+// native SetVehicleColors(vehicleid, color1, color2); // Fake native
+#define SetVehicleColors					ChangeVehicleColor // Alias
+// native SetVehicleColour(vehicleid, color1, color2); // Fake native
+#define SetVehicleColour					ChangeVehicleColor // Alias
+// native SetVehicleColours(vehicleid, color1, color2); // Fake native
+#define SetVehicleColours					ChangeVehicleColor // Alias
 static MainVehicle_SpawnColours[MAX_VEHICLES][2];
-static const MainVehicle_SPColours[][] = { //Data from singleplayer in pairs
+static const MainVehicle_SPColours[][] = { // Data from singleplayer in pairs
 	{4,1, 123,1, 113,1, 101,1, 75,1, 62,1, 40,1, 36,1, -1}, // Landstalker
 	{41,41, 47,47, 52,52, 66,66, 74,74, 87,87,91,91, 113,113, -1}, // Bravura
 	{10,10, 13,13, 22,22, 30,30, 39,39, 90,90, 98,98, 110,110, -1}, // Buffalo
@@ -366,7 +367,7 @@ static const MainVehicle_SPColours[][] = { //Data from singleplayer in pairs
 	{-1} // Utility Trailer [NO DATA FOUND]
 };
 
-//ON VEHICLE VIRTUAL WORLD CHANGE
+// ON VEHICLE VIRTUAL WORLD CHANGE
 /**
  * -DESCRIPTION:
  * 		-Gets called when a vehicle changes virtual worlds.
@@ -386,7 +387,7 @@ forward OnVehicleVirtualWorldChange(vehicleid, newvirtualworldid, oldvirtualworl
 	static MainVehicle_ChangeWorld[MAX_VEHICLES] = {INVALID_VIRTUAL_WORLD_ID, ...};
 #endif
 
-//ON VEHICLE INTERIOR CHANGE
+// ON VEHICLE INTERIOR CHANGE
 /**
  * -DESCRIPTION:
  * 		-Gets called when a vehicle changes interiors.
@@ -407,7 +408,7 @@ forward OnVehicleInteriorChange(vehicleid, newinteriorid, oldinteriorid);
 	static MainVehicle_ChangeWITimer = INVALID_TIMER_ID;
 #endif
 
-//NAMES
+// NAMES
 /**
  * -DESCRIPTION:
  * 		-Vehicle model names.
@@ -438,7 +439,7 @@ static const MainVehicle_VehicleModelNames[][] = {
 	"Baggage Box B", "Tug Stairs", "Boxville", "Farm Trailer", "Utility Trailer"
 };
 
-//GET VEHICLE MODEL NAME
+// GET VEHICLE MODEL NAME
 /**
  * -DESCRIPTION:
  * 		-Get a vehicle model's name.
@@ -452,7 +453,7 @@ static const MainVehicle_VehicleModelNames[][] = {
  * -NOTES:
  * 		-Works like GetPlayerName so that the name is stored in the given string parameter.
  */
-//native GetVehicleModelName(modelid, name[], len); //Fake native
+// native GetVehicleModelName(modelid, name[], len); // Fake native
 stock GetVehicleModelName(modelid, name[], len) {
 	if(modelid >= 400 && modelid <= 611) {
 		return strmid(name, MainVehicle_VehicleModelNames[modelid - 400], 0, len, len);
@@ -460,7 +461,7 @@ stock GetVehicleModelName(modelid, name[], len) {
 	return 0;
 }
 
-//SEAT COUNTS
+// SEAT COUNTS
 /**
  * -DESCRIPTION:
  * 		-Vehicle model seat counts.
@@ -468,7 +469,7 @@ stock GetVehicleModelName(modelid, name[], len) {
  * 		-MP2: http://forum.sa-mp.com/showthread.php?t=339088
  */
 static const MainVehicle_ModelSeatCount[] = {
-	//Comments indicate last vehicle on row
+	// Comments indicate last vehicle on row
 	4,2,2,2,4,4,1,2,2,4, // Stretch
 	2,2,2,4,2,2,4,2,4,2, // Esperanto
 	4,2,2,2,2,1,4,4,4,2, // Banshee
@@ -493,7 +494,7 @@ static const MainVehicle_ModelSeatCount[] = {
 	1,1					 // Utility Trailer
 };
 
-//GET VEHICLE MODEL SEAT COUNT
+// GET VEHICLE MODEL SEAT COUNT
 /**
  * -DESCRIPTION:
  * 		-Get a vehicle model's seat count.
@@ -503,7 +504,7 @@ static const MainVehicle_ModelSeatCount[] = {
  * 		-valid seat count: The function executed successfully.
  * 		-0: The function failed to execute. An invalid vehicle modelid was given.
  */
-//native GetVehicleModelSeatCount(modelid); //Fake native
+// native GetVehicleModelSeatCount(modelid); // Fake native
 stock GetVehicleModelSeatCount(modelid) {
 	if(modelid >= 400 && modelid <= 611) {
 		return MainVehicle_ModelSeatCount[modelid - 400];
@@ -512,7 +513,7 @@ stock GetVehicleModelSeatCount(modelid) {
 	}
 }
 
-//TYPES
+// TYPES
 /**
  * -DESCRIPTION:
  * 		-Vehicle types.
@@ -538,7 +539,7 @@ enum {
 	VEHICLE_TYPE_TRAILER
 }
 
-//GET VEHICLE MODEL TYPE
+// GET VEHICLE MODEL TYPE
 /**
  * -DESCRIPTION:
  * 		-Get a vehicle model's type.
@@ -551,267 +552,267 @@ enum {
  * 		-Originally by YellowBlood and Gabriel 'Larcius' Cordes: https://raw.githubusercontent.com/Kaperstone/uf.inc/master/uf.inc
  * 		-Edited by Freaksken.
  */
-//native GetVehicleModelType(modelid); //Fake native
+// native GetVehicleModelType(modelid); // Fake native
 stock GetVehicleModelType(modelid) {
 	switch(modelid) {
 		case
-		416, //ambulan
-		445, //admiral
-		602, //alpha
-		568, //bandito
-		429, //banshee
-		499, //benson
-		424, //bfinject
-		536, //blade
-		496, //blistac
-		504, //bloodra
-		422, //bobcat
-		609, //boxburg
-		498, //boxville
-		401, //bravura
-		575, //broadway
-		518, //buccanee
-		402, //buffalo
-		541, //bullet
-		482, //burrito
-		431, //bus
-		438, //cabbie
-		457, //caddy
-		527, //cadrona
-		483, //camper
-		524, //cement
-		415, //cheetah
-		542, //clover
-		589, //club
-		480, //comet
-		596, //copcarla
-		599, //copcarru
-		597, //copcarsf
-		598, //copcarvg
-		578, //dft30
-		486, //dozer
-		507, //elegant
-		562, //elegy
-		585, //emperor
-		427, //enforcer
-		419, //esperant
-		587, //euros
-		490, //fbiranch
-		528, //fbitruck
-		533, //feltzer
-		544, //firela
-		407, //firetruk
-		565, //flash
-		455, //flatbed
-		530, //forklift
-		526, //fortune
-		466, //glendale
-		604, //glenshit
-		492, //greenwoo
-		474, //hermes
-		434, //hotknife
-		502, //hotrina
-		503, //hotrinb
-		494, //hotring
-		579, //huntley
-		545, //hustler
-		411, //infernus
-		546, //intruder
-		559, //jester
-		508, //journey
-		571, //kart
-		400, //landstal
-		517, //majestic
-		410, //manana
-		551, //merit
-		500, //mesa
-		418, //moonbeam
-		572, //mower
-		423, //mrwhoop
-		516, //nebula
-		582, //newsvan
-		467, //oceanic
-		404, //peren
-		603, //phoenix
-		600, //picador
-		413, //pony
-		426, //premier
-		436, //previon
-		547, //primo
-		489, //rancher
-		479, //regina
-		534, //remingtn
-		505, //rnchlure
-		442, //romero
-		440, //rumpo
-		475, //sabre
-		543, //sadler
-		605, //sadlshit
-		495, //sandking
-		567, //savanna
-		428, //securica
-		405, //sentinel
-		535, //slamvan
-		458, //solair
-		580, //stafford
-		439, //stallion
-		561, //stratum
-		409, //stretch
-		560, //sultan
-		550, //sunrise
-		506, //supergt
-		601, //swatvan
-		574, //sweeper
-		566, //tahoma
-		549, //tampa
-		420, //taxi
-		459, //topfun
-		576, //tornado
-		451, //turismo
-		558, //uranus
-		540, //vincent
-		491, //virgo
-		412, //voodoo
-		478, //walton
-		421, //washing
-		529, //willard
-		555, //windsor
-		456, //yankee
-		554, //yosemite
-		477, //zr350
-		588, //hotdog
-		437, //coach
-		532, //combine
-		433, //barracks
-		414, //mule
-		443, //packer
-		470, //patriot
-		432, //rhino
-		525, //towtruck
-		408, //trash
-		406, //dumper
-		573, //duneride
-		444, //monster
-		556, //monstera
-		557 //monsterb
+		416, // ambulan
+		445, // admiral
+		602, // alpha
+		568, // bandito
+		429, // banshee
+		499, // benson
+		424, // bfinject
+		536, // blade
+		496, // blistac
+		504, // bloodra
+		422, // bobcat
+		609, // boxburg
+		498, // boxville
+		401, // bravura
+		575, // broadway
+		518, // buccanee
+		402, // buffalo
+		541, // bullet
+		482, // burrito
+		431, // bus
+		438, // cabbie
+		457, // caddy
+		527, // cadrona
+		483, // camper
+		524, // cement
+		415, // cheetah
+		542, // clover
+		589, // club
+		480, // comet
+		596, // copcarla
+		599, // copcarru
+		597, // copcarsf
+		598, // copcarvg
+		578, // dft30
+		486, // dozer
+		507, // elegant
+		562, // elegy
+		585, // emperor
+		427, // enforcer
+		419, // esperant
+		587, // euros
+		490, // fbiranch
+		528, // fbitruck
+		533, // feltzer
+		544, // firela
+		407, // firetruk
+		565, // flash
+		455, // flatbed
+		530, // forklift
+		526, // fortune
+		466, // glendale
+		604, // glenshit
+		492, // greenwoo
+		474, // hermes
+		434, // hotknife
+		502, // hotrina
+		503, // hotrinb
+		494, // hotring
+		579, // huntley
+		545, // hustler
+		411, // infernus
+		546, // intruder
+		559, // jester
+		508, // journey
+		571, // kart
+		400, // landstal
+		517, // majestic
+		410, // manana
+		551, // merit
+		500, // mesa
+		418, // moonbeam
+		572, // mower
+		423, // mrwhoop
+		516, // nebula
+		582, // newsvan
+		467, // oceanic
+		404, // peren
+		603, // phoenix
+		600, // picador
+		413, // pony
+		426, // premier
+		436, // previon
+		547, // primo
+		489, // rancher
+		479, // regina
+		534, // remingtn
+		505, // rnchlure
+		442, // romero
+		440, // rumpo
+		475, // sabre
+		543, // sadler
+		605, // sadlshit
+		495, // sandking
+		567, // savanna
+		428, // securica
+		405, // sentinel
+		535, // slamvan
+		458, // solair
+		580, // stafford
+		439, // stallion
+		561, // stratum
+		409, // stretch
+		560, // sultan
+		550, // sunrise
+		506, // supergt
+		601, // swatvan
+		574, // sweeper
+		566, // tahoma
+		549, // tampa
+		420, // taxi
+		459, // topfun
+		576, // tornado
+		451, // turismo
+		558, // uranus
+		540, // vincent
+		491, // virgo
+		412, // voodoo
+		478, // walton
+		421, // washing
+		529, // willard
+		555, // windsor
+		456, // yankee
+		554, // yosemite
+		477, // zr350
+		588, // hotdog
+		437, // coach
+		532, // combine
+		433, // barracks
+		414, // mule
+		443, // packer
+		470, // patriot
+		432, // rhino
+		525, // towtruck
+		408, // trash
+		406, // dumper
+		573, // duneride
+		444, // monster
+		556, // monstera
+		557 // monsterb
 		: return VEHICLE_TYPE_CAR;
 
 		case
-		403, //linerun
-		515, //rdtrain
-		514, //petro
-		531, //tractor
-		485, //baggage
-		583, //tug
-		552 //utility
+		403, // linerun
+		515, // rdtrain
+		514, // petro
+		531, // tractor
+		485, // baggage
+		583, // tug
+		552 // utility
 		: return VEHICLE_TYPE_TRACTOR;
 
 		case
-		581, //bf400
-		523, //copbike
-		462, //faggio
-		521, //fcr900
-		463, //freeway
-		522, //nrg500
-		461, //pcj600
-		448, //pizzaboy
-		468, //sanchez
-		586 //wayfarer
+		581, // bf400
+		523, // copbike
+		462, // faggio
+		521, // fcr900
+		463, // freeway
+		522, // nrg500
+		461, // pcj600
+		448, // pizzaboy
+		468, // sanchez
+		586 // wayfarer
 		: return VEHICLE_TYPE_BIKE;
 
 		case
-		509, //bike
-		481, //bmx
-		510 //mtbike
+		509, // bike
+		481, // bmx
+		510 // mtbike
 		: return VEHICLE_TYPE_BICYCLE;
 
 		case
-		471 //quad
+		471 // quad
 		: return VEHICLE_TYPE_QUAD;
 
 		case
-		539 //vortex
+		539 // vortex
 		: return VEHICLE_TYPE_HOVERCRAFT;
 
 		case
-		441, //rcbandit
-		594, //rccam
-		564, //rctiger
-		501, //rcgoblin
-		465, //rcraider
-		464 //rcbaron
+		441, // rcbandit
+		594, // rccam
+		564, // rctiger
+		501, // rcgoblin
+		465, // rcraider
+		464 // rcbaron
 		: return VEHICLE_TYPE_RC;
 
 		case
-		472, //coastg
-		473, //dinghy
-		493, //jetmax
-		595, //launch
-		484, //marquis
-		430, //predator
-		453, //reefer
-		452, //speeder
-		446, //squalo
-		454 //tropic
+		472, // coastg
+		473, // dinghy
+		493, // jetmax
+		595, // launch
+		484, // marquis
+		430, // predator
+		453, // reefer
+		452, // speeder
+		446, // squalo
+		454 // tropic
 		: return VEHICLE_TYPE_BOAT;
 
 		case
-		548, //cargobob
-		425, //hunter
-		487, //maverick
-		497, //polmav
-		563, //raindanc
-		469, //sparrow
-		488 //vcnmav
+		548, // cargobob
+		425, // hunter
+		487, // maverick
+		497, // polmav
+		563, // raindanc
+		469, // sparrow
+		488 // vcnmav
 		: return VEHICLE_TYPE_HELI;
 
 		case
-		417, //leviathn
-		447 //seaspar
+		417, // leviathn
+		447 // seaspar
 		: return VEHICLE_TYPE_SEAHELI;
 
 		case
-		592, //androm
-		577, //at-400
-		511, //beagle
-		512, //cropdust
-		593, //dodo
-		520, //hydra
-		553, //nevada
-		476, //rustler
-		519, //shamal
-		513 //stunt
+		592, // androm
+		577, // at-400
+		511, // beagle
+		512, // cropdust
+		593, // dodo
+		520, // hydra
+		553, // nevada
+		476, // rustler
+		519, // shamal
+		513 // stunt
 		: return VEHICLE_TYPE_PLANE;
 
 		case
-		460 //skimmer
+		460 // skimmer
 		: return VEHICLE_TYPE_SEAPLANE;
 
 		case
-		590, //freibox
-		569, //freiflat
-		537, //freight
-		538, //streak
-		570, //streakc
-		449 //tram
+		590, // freibox
+		569, // freiflat
+		537, // freight
+		538, // streak
+		570, // streakc
+		449 // tram
 		: return VEHICLE_TYPE_TRAIN;
 
 		case
-		435, //artict1
-		450, //artict2
-		591, //artict3
-		606, //bagboxa
-		607, //bagboxb
-		610, //farmtr1
-		584, //petrotr
-		608, //tugstair
-		611 //utiltr1
+		435, // artict1
+		450, // artict2
+		591, // artict3
+		606, // bagboxa
+		607, // bagboxb
+		610, // farmtr1
+		584, // petrotr
+		608, // tugstair
+		611 // utiltr1
 		: return VEHICLE_TYPE_TRAILER;
 	}
 	return INVALID_VEHICLE_TYPE;
 }
 
-//GET VEHICLE DRIVER
+// GET VEHICLE DRIVER
 /**
  * -DESCRIPTION:
  * 		-Get a vehicle's driver.
@@ -823,7 +824,7 @@ stock GetVehicleModelType(modelid) {
  * 			-The function executed successfully. The vehicle doesn't have a driver.
  * 			-The function failed to execute. An invalid vehicleid was given.
  */
-//native GetVehicleDriver(vehicleid); //Fake native
+// native GetVehicleDriver(vehicleid); // Fake native
 stock GetVehicleDriver(vehicleid) {
 	if(IsValidVehicle(vehicleid)) {
 		for(new playerid = 0, highestPlayerid = GetPlayerPoolSize(); playerid <= highestPlayerid; playerid++) {
@@ -835,7 +836,7 @@ stock GetVehicleDriver(vehicleid) {
 	return INVALID_PLAYER_ID;
 }
 
-//IS VEHICLE UPSIDE DOWN
+// IS VEHICLE UPSIDE DOWN
 /**
  * -DESCRIPTION:
  * 		-Get whether a vehicle is upside down.
@@ -849,7 +850,7 @@ stock GetVehicleDriver(vehicleid) {
  * -CREDITS:
  * 		-Hencz: http://forum.sa-mp.com/showthread.php?t=167669
  */
-//native bool:IsVehicleUpsideDown(vehicleid); //Fake native
+// native bool:IsVehicleUpsideDown(vehicleid); // Fake native
 stock bool:IsVehicleUpsideDown(vehicleid) {
 	if(IsValidVehicle(vehicleid)) {
 		new Float:w, Float:x, Float:y, Float:z;
@@ -860,69 +861,69 @@ stock bool:IsVehicleUpsideDown(vehicleid) {
 	return false;
 }
 
-//========================================INTERNAL FUNCTIONS========================================
+// ========================================INTERNAL FUNCTIONS========================================
 static MainVehicle_InitScript() {
-	for(new vehicleid = 1; vehicleid < MAX_VEHICLES; vehicleid++) { //Using MAX_VEHICLES instead of GetVehiclePoolSize because we need to initialize the variables of all possible vehicle IDs. Vehicleid start at ID 1
-		//SPAWN WORLDS
+	for(new vehicleid = 1; vehicleid < MAX_VEHICLES; vehicleid++) { // Vehicleid start at ID 1
+		// SPAWN WORLDS
 		MainVehicle_SpawnWorld[vehicleid] = INVALID_VIRTUAL_WORLD_ID;
 
-		//SPAWN INTERIORS
+		// SPAWN INTERIORS
 		MainVehicle_SpawnInterior[vehicleid] = INVALID_INTERIOR_ID;
 
-		//SPAWN PAINTJOBS
+		// SPAWN PAINTJOBS
 		MainVehicle_SpawnPaintjob[vehicleid] = INVALID_PAINTJOB_ID;
 
-		//SYNCED RANDOM SP COLOURS
+		// SYNCED RANDOM SP COLOURS
 		MainVehicle_SpawnColours[vehicleid][0] = INVALID_VEHICLE_COLOR_ID;
 		MainVehicle_SpawnColours[vehicleid][1] = INVALID_VEHICLE_COLOR_ID;
 
 		#if !defined FILTERSCRIPT
-			//ON VEHICLE VIRTUAL WORLD CHANGE
+			// ON VEHICLE VIRTUAL WORLD CHANGE
 			MainVehicle_ChangeWorld[vehicleid] = INVALID_VIRTUAL_WORLD_ID;
 
-			//ON VEHICLE INTERIOR CHANGE
+			// ON VEHICLE INTERIOR CHANGE
 			MainVehicle_ChangeInterior[vehicleid] = INVALID_INTERIOR_ID;
 		#endif
 	}
 
 	#if !defined FILTERSCRIPT
-		//ON VEHICLE VIRTUAL WORLD CHANGE //ON VEHICLE INTERIOR CHANGE
+		// ON VEHICLE VIRTUAL WORLD CHANGE // ON VEHICLE INTERIOR CHANGE
 		MainVehicle_ChangeWITimer = SetTimer("MainVehicle_ChangeWI", 100, true);
 	#endif
 }
 
 static MainVehicle_ExitScript() {
-	for(new vehicleid = 1; vehicleid < MAX_VEHICLES; vehicleid++) { //Using MAX_VEHICLES insteaf of GetVehiclePoolSize because we need to reset the variables of all possible vehicle IDs. Vehicleid start at ID 1
-		//SPAWN WORLDS
+	for(new vehicleid = 1; vehicleid < MAX_VEHICLES; vehicleid++) { // Vehicleid start at ID 1
+		// SPAWN WORLDS
 		MainVehicle_SpawnWorld[vehicleid] = INVALID_VIRTUAL_WORLD_ID;
 
-		//SPAWN INTERIORS
+		// SPAWN INTERIORS
 		MainVehicle_SpawnInterior[vehicleid] = INVALID_INTERIOR_ID;
 
-		//SPAWN PAINTJOBS
+		// SPAWN PAINTJOBS
 		MainVehicle_SpawnPaintjob[vehicleid] = INVALID_PAINTJOB_ID;
 
-		//SYNCED RANDOM SP COLOURS
+		// SYNCED RANDOM SP COLOURS
 		MainVehicle_SpawnColours[vehicleid][0] = INVALID_VEHICLE_COLOR_ID;
 		MainVehicle_SpawnColours[vehicleid][1] = INVALID_VEHICLE_COLOR_ID;
 
 		#if !defined FILTERSCRIPT
-			//ON VEHICLE VIRTUAL WORLD CHANGE
+			// ON VEHICLE VIRTUAL WORLD CHANGE
 			MainVehicle_ChangeWorld[vehicleid] = INVALID_VIRTUAL_WORLD_ID;
 
-			//ON VEHICLE INTERIOR CHANGE
+			// ON VEHICLE INTERIOR CHANGE
 			MainVehicle_ChangeInterior[vehicleid] = INVALID_INTERIOR_ID;
 		#endif
 	}
 
 	#if !defined FILTERSCRIPT
-		//ON VEHICLE VIRTUAL WORLD CHANGE //ON VEHICLE INTERIOR CHANGE
+		// ON VEHICLE VIRTUAL WORLD CHANGE // ON VEHICLE INTERIOR CHANGE
 		KillTimer(MainVehicle_ChangeWITimer);
 		MainVehicle_ChangeWITimer = INVALID_TIMER_ID;
 	#endif
 }
 
-//========================================HOOKED CALLBACKS========================================
+// ========================================HOOKED CALLBACKS========================================
 #if defined FILTERSCRIPT
 	public OnFilterScriptInit()
 	{
@@ -1007,23 +1008,25 @@ static MainVehicle_ExitScript() {
 
 public OnVehicleSpawn(vehicleid)
 {
-	//SPAWN WORLDS
-	if(MainVehicle_SpawnWorld[vehicleid] != INVALID_VIRTUAL_WORLD_ID) { //Only handle vehicles created in this FS/GM
+	// Only handle vehicles created in this FS/GM
+
+	// SPAWN WORLDS
+	if(MainVehicle_SpawnWorld[vehicleid] != INVALID_VIRTUAL_WORLD_ID) {
 		SetVehicleVirtualWorld(vehicleid, MainVehicle_SpawnWorld[vehicleid]);
 	}
 
-	//SPAWN INTERIORS
-	if(MainVehicle_SpawnInterior[vehicleid] != INVALID_INTERIOR_ID) { //Only handle vehicles created in this FS/GM
+	// SPAWN INTERIORS
+	if(MainVehicle_SpawnInterior[vehicleid] != INVALID_INTERIOR_ID) {
 		SetVehicleInterior(vehicleid, MainVehicle_SpawnInterior[vehicleid]);
 	}
 
-	//SPAWN PAINTJOBS
-	if(MainVehicle_SpawnPaintjob[vehicleid] != INVALID_PAINTJOB_ID) { //Only handle vehicles created in this FS/GM
+	// SPAWN PAINTJOBS
+	if(MainVehicle_SpawnPaintjob[vehicleid] != INVALID_PAINTJOB_ID) {
 		SetVehiclePaintjob(vehicleid, MainVehicle_SpawnPaintjob[vehicleid]);
 	}
 
-	//SYNCED RANDOM SP COLOURS
-	if(MainVehicle_SpawnColours[vehicleid][0] != INVALID_VEHICLE_COLOR_ID && MainVehicle_SpawnColours[vehicleid][1] != INVALID_VEHICLE_COLOR_ID) { //Only handle vehicles created in this FS/GM
+	// SYNCED RANDOM SP COLOURS
+	if(MainVehicle_SpawnColours[vehicleid][0] != INVALID_VEHICLE_COLOR_ID && MainVehicle_SpawnColours[vehicleid][1] != INVALID_VEHICLE_COLOR_ID) {
 		SetVehicleColours(vehicleid, MainVehicle_SpawnColours[vehicleid][0], MainVehicle_SpawnColours[vehicleid][1]);
 	}
 
@@ -1043,8 +1046,8 @@ public OnVehicleSpawn(vehicleid)
 	forward MainVehicle_OnVehicleSpawn(vehicleid);
 #endif
 
-//========================================HOOKED FUNCTIONS========================================
-//CHANGE VEHICLE COLOR
+// ========================================HOOKED FUNCTIONS========================================
+// CHANGE VEHICLE COLOR
 /**
  * -DESCRIPTION:
  * 		-Change a vehicle's primary and secondary colours with support for synced random singleplayer colours.
@@ -1056,7 +1059,7 @@ public OnVehicleSpawn(vehicleid)
  * 		-1: The function executed successfully.
  * 		-0: The function failed to execute. An invalid vehcleid was given.
  */
-//native ChangeVehicleColor(vehicleid, color1, color2); //Fake native
+// native ChangeVehicleColor(vehicleid, color1, color2); // Fake native
 stock MainVehicle_ChangeVehicleColor(vehicleid, color1, color2) {
 	new c1 = color1;
 	new c2 = color2;
@@ -1069,20 +1072,22 @@ stock MainVehicle_ChangeVehicleColor(vehicleid, color1, color2) {
 			}
 		}
 
-		//If the data from singleplayer is known and at least one colour is -1, choose a random pair
+		// If the data from singleplayer is known and at least one colour is -1, choose a random pair
 		if(lastIndex != 0 && (color1 == -1 || color2 == -1)) {
-			//Get random pair
+			// Get random pair
 			new randomColor = random(lastIndex);
 
-			//First color
-			if(randomColor % 2 == 1) { //An even value is color1, an odd value is color2. An odd and even value form a pair that will be used together if both colors are -1
+			// First color
+			// An even value is color1, an odd value is color2
+			// An odd and even value form a pair that will be used together if both colors are -1
+			if(randomColor % 2 == 1) {
 				randomColor--;
 			}
 			if(color1 == -1) {
 				c1 = MainVehicle_SPColours[modelid - 400][randomColor];
 			}
 
-			//Second color
+			// Second color
 			++randomColor;
 			if(color2 == -1) {
 				c2 = MainVehicle_SPColours[modelid - 400][randomColor];
@@ -1090,7 +1095,8 @@ stock MainVehicle_ChangeVehicleColor(vehicleid, color1, color2) {
 		}
 	}
 
-	return ChangeVehicleColor(vehicleid, c1, c2); //SYNCED RANDOM SP COLOURS
+	// SYNCED RANDOM SP COLOURS
+	return ChangeVehicleColor(vehicleid, c1, c2);
 }
 #if defined _ALS_ChangeVehicleColor
 	#undef ChangeVehicleColor
@@ -1099,7 +1105,7 @@ stock MainVehicle_ChangeVehicleColor(vehicleid, color1, color2) {
 #endif
 #define ChangeVehicleColor MainVehicle_ChangeVehicleColor
 
-//CREATE VEHICLE
+// CREATE VEHICLE
 /**
  * -DESCRIPTION:
  * 		-Create a vehicle with spawn world, spawn interior and spawn paintjob.
@@ -1128,29 +1134,30 @@ stock MainVehicle_ChangeVehicleColor(vehicleid, color1, color2) {
  * 		-INVALID_VEHICLE_ID: The function failed to execute. An invalid modelid was given or the vehicle limit was reached.
  * 		-0: The function failed to execute. One of the modelids 537 or 538 was given.
  */
-//native CreateVehicle(vehicletype, Float:x, Float:y, Float:z, Float:rotation, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE); //Fake native
+// native CreateVehicle(vehicletype, Float:x, Float:y, Float:z, Float:rotation, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE); // Fake native
 stock MainVehicle_CreateVehicle(vehicletype, Float:x, Float:y, Float:z, Float:rotation, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
 	new vehicleid;
-	if(GetVehicleModelType(vehicletype) == VEHICLE_TYPE_TRAIN) { //TRAINS
+	if(GetVehicleModelType(vehicletype) == VEHICLE_TYPE_TRAIN) {
+		// TRAINS
 		vehicleid = AddStaticVehicleEx(vehicletype, x, y, z, rotation, color1, color2, respawn_delay, addsiren);
 	} else {
 		vehicleid = CreateVehicle(vehicletype, x, y, z, rotation, color1, color2, respawn_delay, addsiren);
 	}
 
 	if(vehicleid != INVALID_VEHICLE_ID) {
-		//SPAWN WORLDS
+		// SPAWN WORLDS
 		MainVehicle_SpawnWorld[vehicleid] = worldid;
 		SetVehicleVirtualWorld(vehicleid, worldid);
 
-		//SPAWN INTERIORS
+		// SPAWN INTERIORS
 		MainVehicle_SpawnInterior[vehicleid] = interiorid;
 		SetVehicleInterior(vehicleid, interiorid);
 
-		//SPAWN PAINTJOBS
+		// SPAWN PAINTJOBS
 		MainVehicle_SpawnPaintjob[vehicleid] = paintjobid;
 		SetVehiclePaintjob(vehicleid, paintjobid);
 
-		//SYNCED RANDOM SP COLOURS
+		// SYNCED RANDOM SP COLOURS
 		MainVehicle_SpawnColours[vehicleid][0] = color1;
 		MainVehicle_SpawnColours[vehicleid][1] = color2;
 		SetVehicleColours(vehicleid, color1, color2);
@@ -1165,7 +1172,7 @@ stock MainVehicle_CreateVehicle(vehicletype, Float:x, Float:y, Float:z, Float:ro
 #endif
 #define CreateVehicle MainVehicle_CreateVehicle
 
-//ADD STATIC VEHICLE EX
+// ADD STATIC VEHICLE EX
 /**
  * -DESCRIPTION:
  * 		-Add a static vehicle with respawn delay, siren, spawn world, spawn interior and spawn paintjob.
@@ -1193,7 +1200,7 @@ stock MainVehicle_CreateVehicle(vehicletype, Float:x, Float:y, Float:z, Float:ro
  * 		-valid vehicleid: The function executed successfully.
  * 		-INVALID_VEHICLE_ID: The function failed to execute. An invalid modelid was given or the vehicle limit was reached.
  */
-//native AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE); //Fake native
+// native AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE); // Fake native
 stock MainVehicle_AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
 	return CreateVehicle(modelid, spawn_x, spawn_y, spawn_z, z_angle, color1, color2, respawn_delay, addsiren, worldid, interiorid, paintjobid);
 }
@@ -1204,7 +1211,7 @@ stock MainVehicle_AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Floa
 #endif
 #define AddStaticVehicleEx MainVehicle_AddStaticVehicleEx
 
-//ADD STATIC VEHICLE
+// ADD STATIC VEHICLE
 /**
  * -DESCRIPTION:
  * 		-Add a static vehicle with respawn delay, siren, spawn world, spawn interior and spawn paintjob.
@@ -1232,7 +1239,7 @@ stock MainVehicle_AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Floa
  * 		-valid vehicleid: The function executed successfully.
  * 		-INVALID_VEHICLE_ID: The function failed to execute. An invalid modelid was given or the vehicle limit was reached.
  */
-//native AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE); //Fake native
+// native AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE); // Fake native
 stock MainVehicle_AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1 = -1, color2 = -1, respawn_delay = 0, addsiren = 0, worldid = VIRTUAL_WORLD_NORMAL, interiorid = INTERIOR_NORMAL, paintjobid = PAINTJOB_NONE) {
 	return CreateVehicle(modelid, spawn_x, spawn_y, spawn_z, z_angle, color1, color2, respawn_delay, addsiren, worldid, interiorid, paintjobid);
 }
@@ -1243,7 +1250,7 @@ stock MainVehicle_AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:
 #endif
 #define AddStaticVehicle MainVehicle_AddStaticVehicle
 
-//DESTROY VEHICLE
+// DESTROY VEHICLE
 /**
  * -DESCRIPTION:
  * 		-Destroy a vehicle and reset spawn world, spawn interior, spawn paintjob and synced random singleplayer colours.
@@ -1253,27 +1260,27 @@ stock MainVehicle_AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:
  * 		-1: The function executed successfully.
  * 		-0: The function failed to execute. An invalid vehicleid was given.
  */
-//native DestroyVehicle(vehicleid); //Fake native
+// native DestroyVehicle(vehicleid); // Fake native
 stock MainVehicle_DestroyVehicle(vehicleid) {
 	if(IsValidVehicle(vehicleid)) {
-		//SPAWN WORLDS
+		// SPAWN WORLDS
 		MainVehicle_SpawnWorld[vehicleid] = INVALID_VIRTUAL_WORLD_ID;
 
-		//SPAWN INTERIORS
+		// SPAWN INTERIORS
 		MainVehicle_SpawnInterior[vehicleid] = INVALID_INTERIOR_ID;
 
-		//SPAWN PAINTJOBS
+		// SPAWN PAINTJOBS
 		MainVehicle_SpawnPaintjob[vehicleid] = INVALID_PAINTJOB_ID;
 
-		//SYNCED RANDOM SP COLOURS
+		// SYNCED RANDOM SP COLOURS
 		MainVehicle_SpawnColours[vehicleid][0] = INVALID_VEHICLE_COLOR_ID;
 		MainVehicle_SpawnColours[vehicleid][1] = INVALID_VEHICLE_COLOR_ID;
 
 		#if !defined FILTERSCRIPT
-			//ON VEHICLE VIRTUAL WORLD CHANGE
+			// ON VEHICLE VIRTUAL WORLD CHANGE
 			MainVehicle_ChangeWorld[vehicleid] = INVALID_VIRTUAL_WORLD_ID;
 
-			//ON VEHICLE INTERIOR CHANGE
+			// ON VEHICLE INTERIOR CHANGE
 			MainVehicle_ChangeInterior[vehicleid] = INVALID_INTERIOR_ID;
 		#endif
 	}
@@ -1287,18 +1294,21 @@ stock MainVehicle_DestroyVehicle(vehicleid) {
 #endif
 #define DestroyVehicle MainVehicle_DestroyVehicle
 
-//========================================TIMERS========================================
+// ========================================TIMERS========================================
 #if !defined FILTERSCRIPT
 	forward MainVehicle_ChangeWI();
 	public MainVehicle_ChangeWI() {
-		for(new vehicleid = 1, highestVehicleid = GetVehiclePoolSize(); vehicleid <= highestVehicleid; vehicleid++) { //Vehicleid start at ID 1
+		for(new vehicleid = 1, highestVehicleid = GetVehiclePoolSize(); vehicleid <= highestVehicleid; vehicleid++) { // Vehicleid start at ID 1
 			if(IsValidVehicle(vehicleid)) {
 				new newWorld = GetVehicleVirtualWorld(vehicleid);
 				new oldWorld = MainVehicle_ChangeWorld[vehicleid];
 				if(newWorld != oldWorld) {
 					MainVehicle_ChangeWorld[vehicleid] = newWorld;
-					if(oldWorld != INVALID_VIRTUAL_WORLD_ID) { //Don't call when the vehicle is initializing
-						CallRemoteFunction("OnVehicleVirtualWorldChange", "iii", vehicleid, newWorld, oldWorld); //ON VEHICLE VIRTUAL WORLD CHANGE
+
+					// Don't call when the vehicle is initializing
+					if(oldWorld != INVALID_VIRTUAL_WORLD_ID) {
+						// ON VEHICLE VIRTUAL WORLD CHANGE
+						CallRemoteFunction("OnVehicleVirtualWorldChange", "iii", vehicleid, newWorld, oldWorld);
 					}
 				}
 
@@ -1306,8 +1316,11 @@ stock MainVehicle_DestroyVehicle(vehicleid) {
 				new oldInterior = MainVehicle_ChangeInterior[vehicleid];
 				if(newInterior != oldInterior) {
 					MainVehicle_ChangeInterior[vehicleid] = newInterior;
-					if(oldInterior != INVALID_INTERIOR_ID) { //Don't call when the vehicle is initializing
-						CallRemoteFunction("OnVehicleInteriorChange", "iii", vehicleid, newInterior, oldInterior); //ON VEHICLE INTERIOR CHANGE
+
+					// Don't call when the vehicle is initializing
+					if(oldInterior != INVALID_INTERIOR_ID) {
+						// ON VEHICLE INTERIOR CHANGE
+						CallRemoteFunction("OnVehicleInteriorChange", "iii", vehicleid, newInterior, oldInterior);
 					}
 				}
 			}

@@ -3,7 +3,7 @@
 #endif
 #define _mainlimit_included
 
-//UNRELATED LIMITS
+// UNRELATED LIMITS
 /**
  * -DESCRIPTION:
  * 		-Defines some unrelated limits.

@@ -3,7 +3,7 @@
 #endif
 #define _custominterior_included
 
-//LIBERTY CITY INTERIOR
+// LIBERTY CITY INTERIOR
 /**
  * -DESCRIPTION:
  * 		-Defines the interior used by Liberty City.

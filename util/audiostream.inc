@@ -3,7 +3,7 @@
 #endif
 #define _mainaudiostream_included
 
-//DURATION
+// DURATION
 /**
  * -DESCRIPTION:
  * 		-Automatically stops audio streams after they have finished playing.
@@ -20,18 +20,18 @@
 static MainAudioStream_DurationTimer[MAX_PLAYERS] = {INVALID_TIMER_ID, ...};
 static MainAudioStream_RadioFixTimer[MAX_PLAYERS] = {INVALID_TIMER_ID, ...};
 
-//========================================INTERNAL FUNCTIONS========================================
+// ========================================INTERNAL FUNCTIONS========================================
 static MainAudioStream_InitScript() {
-	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) { //Using MAX_PLAYERS instead of GetPlayerPoolSize because we need to initialize the variables of all possible player IDs
-		//DURATION
+	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) {
+		// DURATION
 		MainAudioStream_DurationTimer[playerid] = INVALID_TIMER_ID;
 		MainAudioStream_RadioFixTimer[playerid] = INVALID_TIMER_ID;
 	}
 }
 
 static MainAudioStream_ExitScript() {
-	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) { //Using MAX_PLAYERS instead of GetPlayerPoolSize because we need to reset the variables of all possible player IDs
-		//DURATION
+	for(new playerid = 0; playerid < MAX_PLAYERS; playerid++) {
+		// DURATION
 		KillTimer(MainAudioStream_DurationTimer[playerid]);
 		MainAudioStream_DurationTimer[playerid] = INVALID_TIMER_ID;
 		KillTimer(MainAudioStream_RadioFixTimer[playerid]);
@@ -39,7 +39,7 @@ static MainAudioStream_ExitScript() {
 	}
 }
 
-//========================================HOOKED CALLBACKS========================================
+// ========================================HOOKED CALLBACKS========================================
 #if defined FILTERSCRIPT
 	public OnFilterScriptInit()
 	{
@@ -122,8 +122,8 @@ static MainAudioStream_ExitScript() {
 	#endif
 #endif
 
-//========================================HOOKED FUNCTIONS========================================
-//PLAY AUDIO STREAM FOR PLAYER
+// ========================================HOOKED FUNCTIONS========================================
+// PLAY AUDIO STREAM FOR PLAYER
 /**
  * -DESCRIPTION:
  * 		-Play an audio stream for a player and automatically stop it after it has finished.
@@ -146,18 +146,18 @@ static MainAudioStream_ExitScript() {
  * 		-1: The function executed successfully.
  * 		-0: The function failed to execute. An invalid playerid was given.
  */
-//native PlayAudioStreamForPlayer(playerid, const url[], Float:posX = 0.0, Float:posY = 0.0, Float:posZ = 0.0, Float:distance = 50.0, usepos = 0, time = -1); //Fake native
+// native PlayAudioStreamForPlayer(playerid, const url[], Float:posX = 0.0, Float:posY = 0.0, Float:posZ = 0.0, Float:distance = 50.0, usepos = 0, time = -1); // Fake native
 stock MainAudioStream_PlayAudioStream(playerid, const url[], Float:posX = 0.0, Float:posY = 0.0, Float:posZ = 0.0, Float:distance = 50.0, usepos = 0, time = -1) {
 	new ret = PlayAudioStreamForPlayer(playerid, url, posX, posY, posZ, distance, usepos);
 	if(ret == 1) {
-		//DURATION
+		// DURATION
 		KillTimer(MainAudioStream_DurationTimer[playerid]);
 		MainAudioStream_DurationTimer[playerid] = INVALID_TIMER_ID;
 		if(MainAudioStream_RadioFixTimer[playerid] != INVALID_TIMER_ID) {
 			MainAudioStream_RadioFix(playerid);
 		}
 		if(time != -1) {
-			MainAudioStream_DurationTimer[playerid] = SetTimerEx("MainAudioStream_Duration", time + 2000, false, "d", playerid); //2 seconds extra
+			MainAudioStream_DurationTimer[playerid] = SetTimerEx("MainAudioStream_Duration", time + 2000, false, "d", playerid); // 2 seconds extra
 		}
 	}
 	return ret;
@@ -169,7 +169,7 @@ stock MainAudioStream_PlayAudioStream(playerid, const url[], Float:posX = 0.0, F
 #endif
 #define PlayAudioStreamForPlayer MainAudioStream_PlayAudioStream
 
-//STOP AUDIO STREAM FOR PLAYER
+// STOP AUDIO STREAM FOR PLAYER
 /**
  * -DESCRIPTION:
  * 		-Stop the current audio stream for a player and kill the duration timer.
@@ -178,9 +178,9 @@ stock MainAudioStream_PlayAudioStream(playerid, const url[], Float:posX = 0.0, F
  * -RETURN VALUES:
  * 		-This function doesn't return anything.
  */
-//native StopAudioStreamForPlayer(playerid); //Fake native
+// native StopAudioStreamForPlayer(playerid); // Fake native
 stock MainAudioStream_StopAudioStream(playerid) {
-	//DURATION
+	// DURATION
 	if(IsPlayerInAnyVehicle(playerid)) {
 		PlayerPlaySound(playerid, 1068, 0.0, 0.0, 0.0);
 		MainAudioStream_RadioFixTimer[playerid] = SetTimerEx("MainAudioStream_RadioFix", 50, false, "d", playerid);
@@ -196,16 +196,16 @@ stock MainAudioStream_StopAudioStream(playerid) {
 #endif
 #define StopAudioStreamForPlayer MainAudioStream_StopAudioStream
 
-//========================================TIMERS========================================
+// ========================================TIMERS========================================
 forward MainAudioStream_Duration(playerid);
 public MainAudioStream_Duration(playerid) {
-	//DURATION
+	// DURATION
 	StopAudioStreamForPlayer(playerid);
 }
 
 forward MainAudioStream_RadioFix(playerid);
 public MainAudioStream_RadioFix(playerid) {
-	//DURATION
+	// DURATION
 	PlayerPlaySound(playerid, 1069, 0.0, 0.0, 0.0);
 	KillTimer(MainAudioStream_RadioFixTimer[playerid]);
 	MainAudioStream_RadioFixTimer[playerid] = INVALID_TIMER_ID;

@@ -3,7 +3,7 @@
 #endif
 #define _mainmath_included
 
-//PI
+// PI
 /**
  * -DESCRIPTION:
  * 		-Mathematical constant pi.
@@ -12,7 +12,7 @@
 	#define PI									(Float:3.14159265)
 #endif
 
-//INFINITY INTEGER
+// INFINITY INTEGER
 /**
  * -DESCRIPTION:
  * 		-Largest signed 32-bit integer (2147483647).
@@ -21,7 +21,7 @@
 	#define INFINITY							cellmax
 #endif
 
-//NEGATIVE INFINITY INTEGER
+// NEGATIVE INFINITY INTEGER
 /**
  * -DESCRIPTION:
  * 		-Smallest signed 32-bit integer (-2147483648).
@@ -30,7 +30,7 @@
 	#define NEG_INFINITY						cellmin
 #endif
 
-//INFINITY FLOAT
+// INFINITY FLOAT
 /**
  * -DESCRIPTION:
  * 		-Positive infinity as per the IEEE 754-1985 standard.
@@ -39,7 +39,7 @@
 	#define FLOAT_INFINITY						(Float:0x7F800000)
 #endif
 
-//NEGATIVE INFINITY FLOAT
+// NEGATIVE INFINITY FLOAT
 /**
  * -DESCRIPTION:
  * 		-Negative infinity as per the IEEE 754-1985 standard.
@@ -48,7 +48,7 @@
 	#define FLOAT_NEG_INFINITY					(Float:0xFF800000)
 #endif
 
-//NOT A NUMBER FLOAT
+// NOT A NUMBER FLOAT
 /**
  * -DESCRIPTION:
  * 		-Not a number as per the IEEE 754-1985 standard.
@@ -57,7 +57,7 @@
 	#define FLOAT_NAN							(Float:0x7FFFFFFF)
 #endif
 
-//IS NOT A NUMBER
+// IS NOT A NUMBER
 /**
  * -DESCRIPTION:
  * 		-Gets whether a number is not a number.
@@ -72,12 +72,12 @@
  * -CREDITS:
  * 		-Y_Less: http://forum.sa-mp.com/showthread.php?t=583472
  */
-//native bool:IsNaN(number); //Fake native
+// native bool:IsNaN(number); // Fake native
 stock bool:IsNaN(number) {
 	return (number != number);
 }
 
-//GET POINT ON EDGE OF CIRCLE
+// GET POINT ON EDGE OF CIRCLE
 /**
  * -DESCRIPTION:
  * 		-Get a point on the edge of a circle given a radius and angle.
@@ -94,7 +94,7 @@ stock bool:IsNaN(number) {
  * 		-Math angles: N = 90°, E = 0°, S = 270°, W = 180°
  * 		-GTA angles: N = 0°, E = 270°, S = 180°, W = 90°
  */
-//native GetPointOnEdgeOfCircle(&Float:x, &Float:y, Float:r, Float:a, bool:isGTAAngle = false); //Fake native
+// native GetPointOnEdgeOfCircle(&Float:x, &Float:y, Float:r, Float:a, bool:isGTAAngle = false); // Fake native
 stock GetPointOnEdgeOfCircle(&Float:x, &Float:y, Float:r, Float:a, bool:isGTAAngle = false) {
 	if(isGTAAngle) {
 		a += 90.0;

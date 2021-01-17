@@ -3,7 +3,7 @@
 #endif
 #define _mainweather_included
 
-//DEFAULT WEATHER
+// DEFAULT WEATHER
 /**
  * -DESCRIPTION:
  * 		-Defines the default weather used by SA-MP.
@@ -12,7 +12,7 @@
  */
 #define WEATHER_NORMAL						10
 
-//GET WEATHER
+// GET WEATHER
 /**
  * -DESCRIPTION:
  * 		-Get the weather.
@@ -21,7 +21,7 @@
  * -RETURN VALUES:
  * 		-weather: The function executed successfully.
  */
-//native GetWeather(); //Fake native
+// native GetWeather(); // Fake native
 #if !defined GetWeather
 	stock GetWeather() {
 		return GetConsoleVarAsInt("weather");

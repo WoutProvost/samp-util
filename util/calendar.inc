@@ -3,7 +3,7 @@
 #endif
 #define _maincalendar_included
 
-//GET WEEK DAY
+// GET WEEK DAY
 /**
  * -DESCRIPTION:
  * 		-Get the day of the week of a given date.
@@ -19,12 +19,12 @@
  * -CREDITS:
  * 		-Michael Keith and Tom Craver: https://en.wikipedia.org/wiki/Determination_of_the_day_of_the_week#Implementation-dependent_methods
  */
-//native GetWeekDay(year, month, day); //Fake native
+// native GetWeekDay(year, month, day); // Fake native
 stock GetWeekDay(year, month, day) {
 	return (day += month < 3 ? year-- : year-2 , 23*month/9+day+4+year/4-year/100+year/400) % 7;
 }
 
-//WEEKDAY NAMES
+// WEEKDAY NAMES
 /**
  * -DESCRIPTION:
  * 		-Weekday names and 3 character abbreviations.
@@ -41,7 +41,7 @@ static const MainCalendar_WeekdayNames[][2][] = {
 	{"Saturday", "Sat"}
 };
 
-//GET WEEKDAY NAME
+// GET WEEKDAY NAME
 /**
  * -DESCRIPTION:
  * 		-Get a weekday's name.
@@ -55,15 +55,16 @@ static const MainCalendar_WeekdayNames[][2][] = {
  * -NOTES:
  * 		-Works like GetPlayerName so that the name is stored in the given string parameter.
  */
-//native GetWeekdayName(weekday, name[], len); //Fake native
+// native GetWeekdayName(weekday, name[], len); // Fake native
 stock GetWeekdayName(weekday, name[], len) {
 	if(weekday >= 0 && weekday <= 6) {
-		return strmid(name, MainCalendar_WeekdayNames[weekday][0], 0, len, len); //WEEKDAY NAMES
+		// WEEKDAY NAMES
+		return strmid(name, MainCalendar_WeekdayNames[weekday][0], 0, len, len);
 	}
 	return 0;
 }
 
-//GET WEEKDAY SHORT NAME
+// GET WEEKDAY SHORT NAME
 /**
  * -DESCRIPTION:
  * 		-Get a weekday's abbreviated name.
@@ -77,15 +78,16 @@ stock GetWeekdayName(weekday, name[], len) {
  * -NOTES:
  * 		-Works like GetPlayerName so that the abbreviated name is stored in the given string parameter.
  */
-//native GetWeekdayShortName(weekday, name[], len); //Fake native
+// native GetWeekdayShortName(weekday, name[], len); // Fake native
 stock GetWeekdayShortName(weekday, name[], len) {
 	if(weekday >= 0 && weekday <= 6) {
-		return strmid(name, MainCalendar_WeekdayNames[weekday][1], 0, len, len); //WEEKDAY NAMES
+		// WEEKDAY NAMES
+		return strmid(name, MainCalendar_WeekdayNames[weekday][1], 0, len, len);
 	}
 	return 0;
 }
 
-//MONTH NAMES
+// MONTH NAMES
 /**
  * -DESCRIPTION:
  * 		-Month names and 3 character abbreviations.
@@ -107,7 +109,7 @@ static const MainCalendar_MonthNames[][2][] = {
 	{"December", "Dec"}
 };
 
-//GET MONTH NAME
+// GET MONTH NAME
 /**
  * -DESCRIPTION:
  * 		-Get a month's name.
@@ -121,15 +123,16 @@ static const MainCalendar_MonthNames[][2][] = {
  * -NOTES:
  * 		-Works like GetPlayerName so that the name is stored in the given string parameter.
  */
-//native GetMonthName(month, name[], len); //Fake native
+// native GetMonthName(month, name[], len); // Fake native
 stock GetMonthName(month, name[], len) {
 	if(month >= 1 && month <= 12) {
-		return strmid(name, MainCalendar_MonthNames[month-1][0], 0, len, len); //MONTH NAMES
+		// MONTH NAMES
+		return strmid(name, MainCalendar_MonthNames[month-1][0], 0, len, len);
 	}
 	return 0;
 }
 
-//GET MONTH SHORT NAME
+// GET MONTH SHORT NAME
 /**
  * -DESCRIPTION:
  * 		-Get a month's abbreviated name.
@@ -143,10 +146,11 @@ stock GetMonthName(month, name[], len) {
  * -NOTES:
  * 		-Works like GetPlayerName so that the abbreviated name is stored in the given string parameter.
  */
-//native GetMonthShortName(month, name[], len); //Fake native
+// native GetMonthShortName(month, name[], len); // Fake native
 stock GetMonthShortName(month, name[], len) {
 	if(month >= 1 && month <= 12) {
-		return strmid(name, MainCalendar_MonthNames[month-1][1], 0, len, len); //MONTH NAMES
+		// MONTH NAMES
+		return strmid(name, MainCalendar_MonthNames[month-1][1], 0, len, len);
 	}
 	return 0;
 }

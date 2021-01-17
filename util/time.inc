@@ -3,7 +3,7 @@
 #endif
 #define _maintime_included
 
-//DEFAULT TIME
+// DEFAULT TIME
 /**
  * -DESCRIPTION:
  * 		-Defines the default hours and minutes used by SA-MP.
@@ -13,7 +13,7 @@
 #define TIME_HOUR_NORMAL					12
 #define TIME_MINUTE_NORMAL					0
 
-//GET WORLD TIME
+// GET WORLD TIME
 /**
  * -DESCRIPTION:
  * 		-Get the world time.
@@ -22,7 +22,7 @@
  * -RETURN VALUES:
  * 		-worldtime: The function executed successfully.
  */
-//native GetWorldTime(); //Fake native
+// native GetWorldTime(); // Fake native
 #if !defined GetWorldTime
 	stock GetWorldTime() {
 		new buffer[2 + 1];

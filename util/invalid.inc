@@ -3,7 +3,7 @@
 #endif
 #define _maininvalid_included
 
-//UNRELATED INVALID IDs
+// UNRELATED INVALID IDs
 /**
  * -DESCRIPTION:
  * 		-Defines some unrelated invalid IDs.
