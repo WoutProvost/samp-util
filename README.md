@@ -1,5 +1,6 @@
 # samp-util
 ![sampctl](https://img.shields.io/badge/sampctl-samp--util-2f2f2f.svg?style=for-the-badge)
+![Total Downloads](https://img.shields.io/github/downloads/WoutProvost/samp-util/total.svg?label=total%20downloads)
 
 A set of useful utility functions for SA-MP.
 
