@@ -232,11 +232,18 @@ forward OnPlayerUnpause(playerid);
 -->
 ### Weapon.inc
 ```pawn
+#define MAX_WEAPONS					47
 #define INVALID_WEAPON_ID				-1
+#define WEAPON_FISTS					0
+#define WEAPON_NIGHTVISION				44
+#define WEAPON_INFRARED					45
 #define MAX_WEAPON_NAME					31
 
 bool:IsValidWeapon(weaponid);
 GetWeaponModel(weaponid);
+bool:IsWeaponSprintAllowed(weaponid);
+bool:IsWeaponCrouchAllowed(weaponid);
+Float:GetWeaponDamage(weaponid);
 Float:GetWeaponVehicleDamage(weaponid);
 bool:IsMeleeWeapon(weaponid);
 GetWeaponName(weaponid, name[], len);
